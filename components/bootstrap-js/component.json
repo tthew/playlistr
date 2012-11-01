@@ -1,0 +1,15 @@
+{
+  "name": "bootstrap-js",
+  "version": "2.1.1",
+  "main": "./bootstrap.js",
+  "dependencies": {
+    "jquery": "~1.7.2"
+  },
+  "readme": "ERROR: No README.md file found!",
+  "description": "ERROR: No README.md file found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arhea/bower-bootstrap-js"
+  },
+  "_id": "bootstrap-js@2.1.1"
+}

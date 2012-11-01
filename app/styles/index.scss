@@ -1,0 +1,17 @@
+@import "compass_twitter_bootstrap";
+
+.main-content {
+	margin-top: 50px;
+}
+
+.sidebar {
+	border: 1px solid #ccc;
+}
+
+.playlists li .delete {
+	display: none;
+}
+
+.playlists li:hover .delete {
+	display: inline;
+}

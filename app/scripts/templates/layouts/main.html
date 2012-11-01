@@ -1,0 +1,50 @@
+
+<div class="navbar navbar-fixed-top navbar-inverse row-fluid">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="brand" href="#">Playlistr</a>
+			<ul class="nav pull-right">
+				<li>
+				<a href="#playlistr-new-playlist" role="button" class=" pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i> Create New Playlist</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="playlists" ng-subview></div> -->
+
+<div class="playlists main-content row-fluid">
+	<div class="sidebar span2">
+		<ul>
+			<li ng-repeat="playlist in playlists"><a href="#/playlist/{{playlist.id}}">{{playlist.title}}</a> <a class="delete" ng-click="deletePlaylist(playlist)"><i class='icon-trash'></i> <span class="hide">delete</span></a></li>
+		</ul>
+	</div>
+
+	<div class="span10">
+		Main
+	</div>
+</div>
+
+
+	<div id="playlistr-new-playlist" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>New Playlist</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<fieldset>
+				<label>Title</label>
+				<input ng-model="playlistTitle" type="text" placeholder="My Playlist" />
+				<label>Description</label>
+				<textarea ng-model="playlistDescription"></textarea>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" ng-click="closeModal()">Close</a>
+    	<a href="#" class="btn btn-primary" ng-click="createNewPlaylist()">Create Playlist</a>
+	</div>
+	</div>
