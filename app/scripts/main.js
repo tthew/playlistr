@@ -6,7 +6,7 @@ require([
 
   // Main Router.
   "router",
-    "views/playlists-view",
+  "views/playlists-view",
   "views/playlist-view",  
 ],
 

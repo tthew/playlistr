@@ -6,7 +6,8 @@ define([
 
   // Plugins.
   "plugins/backbone.layoutmanager",
-  "../components/bootstrap-js/bootstrap.js"
+  "../components/bootstrap-js/bootstrap.js",
+  "../components/backbone.marionette/lib/backbone.marionette"
 
 ],
 
