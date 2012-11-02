@@ -3,7 +3,7 @@ define([
   "app",
   // Playlists View
   "views/playlists-view",
-  "views/playlist-view",  
+  // "views/playlists-view",  
 ],
 
 function(app, PlaylistsView, PlaylistView) {

@@ -1,19 +1,14 @@
 define([
 	'lodash',
   	'backbone',
-  	'collections/playlists-collection'
-], function(_, Backbone, PlaylistsCollection){
-  var view = Backbone.View.extend({
-  	el: '.sidebar',
-  	collection: PlaylistsCollection,
+    'marionette',
+  	'collections/playlists-collection',
+    'views/playlist-list-item-view'
+], function(_, Backbone, Marionette, PlaylistsCollection, PlaylistListItemView){
+  return Marionette.CompositeView.extend({
   	template: _.template($('#plstr-tmpl-playlists').html()),
-  
-  	render: function() {
-		$(this.el).html(this.template({
-			playlists: this.collection.toJSON()
-		}));
-  	}
+    itemView: PlaylistListItemView,
+    itemViewContainer: 'ul'
   });
-  // Return the model for the module
-  return view;
+
 });

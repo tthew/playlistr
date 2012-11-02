@@ -1,12 +1,17 @@
 define([
 	'lodash',
-  	'backbone'
-], function(_, Backbone){
-  var model = Backbone.Model.extend({
-  	'title': '',
-  	'description': '',
-  	'sounds': []
-  });
-  // Return the model for the module
-  return model;
+  	'backbone',
+  	'collections/sounds-collection',
+  	'../../components/Backbone.localStorage/backbone.localStorage'
+], function(_, Backbone, SoundsCollection){
+	return Backbone.Model.extend({
+		localStorage: new Backbone.LocalStorage('plstr-playlists'),
+		defaults: {
+			'title': '',
+			'description': '',
+			'sounds': ''
+		}
+  		
+	});
+  	
 });

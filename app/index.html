@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles/index.css"/>
     </head>
     <body>
-        <div class="navbar navbar-fixed-top navbar-inverse row-fluid">
+        <div id="plstr-nav" class="navbar navbar-fixed-top navbar-inverse row-fluid">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="brand" href="#">Playlistr</a>
@@ -26,17 +26,17 @@
             </div>
         </div>
         <div class="playlists main-content row-fluid">
-            <div class="sidebar span2">
-
+            <div id="plstr-sidebar" class="sidebar span2">
+                
             </div>
 
-            <div class="detail" class="span10">
-                Main
+            <div id="plstr-main" class="main" class="span10">
+                
             </div>
         </div>
 
-
-        <script type="text/html" id="plstr-tmpl-new-playlist-modal">
+        <div id="plstr-modal"></div>
+        <div id="plstr-new-playlist" class="modal hide fade">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>New Playlist</h3>
@@ -55,32 +55,50 @@
             <a href="#" class="btn" ng-click="closeModal()">Close</a>
             <a href="#" class="btn btn-primary" ng-click="createNewPlaylist()">Create Playlist</a>
         </div>
+        </div>
+
+        <script type="text/html" id="plstr-tmpl-new-playlist-modal">
+       
         </script>
-
-        <div id="plstr-modal"></div>
-
-
         <script type="text/html" id="plstr-tmpl-playlists">
             <ul class="nav nav-list">
-                <li class="nav-header">Playlists</li>
-                <% _.each(playlists, function(playlist) { %>
-                <li><%= playlist.title %></li>
-                <% }); %>
+                
             </ul>
         </script>
 
-        <script type="text/html" id="plstr-tmpl-playlist">
+        <script type="text/html" id="plstr-tmpl-playlist-list-item">
+            <li><%= title %></li>
+        </script>
+
+        <script type="text/html" id="plstr-tmpl-sound-item">
+            <td class="playing"><% if (playing) { %><i class="icon-play"></i><% } %></td>
+            <td><%= title %></td>
+        </script>
+        <script type="text/html" id="plstr-tmpl-playlist-detail">
             <div class="span8">
-        
+            <h1><%= title %></h1>
+            <p><%= description %></p>
+
+            <table class="table">
+            <thead>
+                <tr>
+                    <th class='playing'>&nbsp;</th>
+                    <th>Track</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            </table>
             </div>
 
             <div class="span2">
                 <form class="form">
                     <fieldset>
                         <label>Title</label>
-                        <input type="text" />
+                        <input type="text" value="<%= title %>" />
                         <label>Description</label>
-                        <textarea></textarea>   
+                        <textarea><%= description %></textarea>   
                         <div><a class="btn">Save Changes</a></div>
                     </fieldset>
                 </form>
@@ -93,7 +111,13 @@
 
         <!-- Add your site or application content here -->
 
-
+        
+        <script src="//connect.soundcloud.com/sdk.js"></script>
+        <script type="text/javascript">
+            SC.initialize({
+                client_id: '4fb5b0db1d4852e4b1487a0254a74b70'
+            });
+        </script>
         <!-- build:js scripts/amd-app.js -->
         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
         <!-- endbuild -->

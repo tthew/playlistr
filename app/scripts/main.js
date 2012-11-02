@@ -7,48 +7,14 @@ require([
   // Main Router.
   "router",
   "views/playlists-view",
-  "views/playlist-view",  
+  "views/playlist-list-item-view"
 ],
 
-function(app, Router, PlaylistsView, PlaylistView) {
+function(Playlistr, Router) {
 
-  // Define your master router on the application namespace and trigger all
-  // navigation from this instance.
-  app.useLayout('main');
-  app.router = new Router();
-      var playlistsView = new PlaylistsView({
-        collection: new Backbone.Collection([
-          {'title': 'Playlist 1'},
-          {'title': 'Playlist 2'},
-          {'title': 'Playlist 3'},
-          {'title': 'Playlist 4'},
-          {'title': 'Playlist 5'}
-        ])
-      }).render();
-      
-      var playlistView = new PlaylistView().render();
-  // Trigger the initial route and enable HTML5 History API support, set the
-  // root folder to '/' by default.  Change in app.js.
-  Backbone.history.start({ pushState: true, root: app.root });
+  Playlistr.start();
 
-  // All navigation that is relative should be passed through the navigate
-  // method, to be processed by the router. If the link has a `data-bypass`
-  // attribute, bypass the delegation completely.
-  $(document).on("click", "a:not([data-bypass])", function(evt) {
-    // Get the absolute anchor href.
-    var href = $(this).attr("href");
-
-    // If the href exists and is a hash route, run it through Backbone.
-    if (href && href.indexOf("#") === 0) {
-      // Stop the default event to ensure the link will not cause a page
-      // refresh.
-      evt.preventDefault();
-
-      // `Backbone.history.navigate` is sufficient for all Routers and will
-      // trigger the correct events. The Router's internal `navigate` method
-      // calls this anyways.  The fragment is sliced from the root.
-      Backbone.history.navigate(href, true);
-    }
-  });
+  Playlistr.router = new Router();
+  Backbone.history.start();
 
 });
