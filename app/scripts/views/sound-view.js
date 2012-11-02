@@ -19,15 +19,48 @@ define([
 
     click: function() {
       var self = this;
-      // console.log(this);
-      Vent.trigger("sound:play");
-      this.model.set('playing', true);
+      
+      
       SC.stream("/tracks/" + this.model.get('id'), function(sound) {
-        Vent.bind("sound:play", function() {
+        var stopSound = function() {
           sound.stop();
           self.model.set('playing', false);
+        };
+
+        Vent.bind("sound:play", function(model) {
+
+          if (!model) {
+            sound.play(); 
+            return;
+          }
+
+          if (model.get('id') == self.model.get('id')) {
+            if (self.model.get('playing') == false) {
+              sound.play();
+            }
+          } else {
+            stopSound();  
+          }
         });
-        sound.play();
+
+        Vent.bind("sound:stop", function() {
+          stopSound();
+        });
+
+        Vent.bind("sound:pause", function() {
+          sound.pause();
+        })
+
+        Vent.bind("sound:resume", function() {
+          sound.play();
+        });
+
+        if (!self.model.get('playing')) {
+          sound.play();
+          self.model.set('playing', true);
+          Vent.trigger("sound:play", self.model);
+        }
+          
       })
     }
 

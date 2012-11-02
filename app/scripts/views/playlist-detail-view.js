@@ -11,7 +11,9 @@ define([
     itemView: SoundView,
     itemViewContainer: 'tbody',
     events: {
-      'click li': 'click'
+      'click .stop': 'stop',
+      'click .pause': 'pause',
+      'click .play': 'play'      
     },
   
     initialize: function() {
@@ -24,8 +26,16 @@ define([
       })
     },
 
-    click: function() {
-      // Vent.trigger('playlist:show', this.model);
+    stop: function() {
+      Vent.trigger('sound:stop');
+    },
+
+    pause: function() {
+      Vent.trigger('sound:pause');
+    },
+
+    play: function() {
+      Vent.trigger('sound:play');
     }
   });
   

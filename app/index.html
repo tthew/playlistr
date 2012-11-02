@@ -72,14 +72,14 @@
 
         <script type="text/html" id="plstr-tmpl-sound-item">
             <td class="playing"><% if (playing) { %><i class="icon-play"></i><% } %></td>
-            <td><%= title %></td>
+            <td><%= title %><br /><img class="span6 waveform" src="<%= waveform_url %>" alt= "" /></td>
         </script>
         <script type="text/html" id="plstr-tmpl-playlist-detail">
             <div class="span8">
             <h1><%= title %></h1>
             <p><%= description %></p>
-
-            <table class="table">
+            <p><a class="btn start play"><i class="icon-play"></i> Play All</a> <a class="btn pause"><i class="icon-pause"></i> Pause</a> <a class="btn stop"><i class="icon-stop"></i> Stop</a></p>
+            <table class="table playlist">
             <thead>
                 <tr>
                     <th class='playing'>&nbsp;</th>

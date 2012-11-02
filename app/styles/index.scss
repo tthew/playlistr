@@ -19,3 +19,15 @@
 table.table tr .playing {
 	width: 16px;
 }
+
+.playlist .waveform {
+	background: #444;
+}
+
+.playlist tr {
+	cursor: pointer;
+}
+
+.playlist tr:hover td {
+	background-color: rgba(0,0,255,0.1);
+}
