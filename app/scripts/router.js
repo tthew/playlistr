@@ -1,9 +1,12 @@
 define([
   // Application.
-  "app"
+  "app",
+  // Playlists View
+  "views/playlists-view",
+  "views/playlist-view",  
 ],
 
-function(app) {
+function(app, PlaylistsView, PlaylistView) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -12,6 +15,7 @@ function(app) {
     },
 
     index: function() {
+
 
     }
   });

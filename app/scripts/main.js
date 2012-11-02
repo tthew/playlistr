@@ -6,22 +6,27 @@ require([
 
   // Main Router.
   "router",
-
-  "models/sound-model"
+    "views/playlists-view",
+  "views/playlist-view",  
 ],
 
-function(app, Router, SoundModel) {
+function(app, Router, PlaylistsView, PlaylistView) {
 
   // Define your master router on the application namespace and trigger all
   // navigation from this instance.
-  app.router = new Router();
-
-  var sound = new SoundModel();
-
   app.useLayout('main');
-
-  console.log(sound);
-
+  app.router = new Router();
+      var playlistsView = new PlaylistsView({
+        collection: new Backbone.Collection([
+          {'title': 'Playlist 1'},
+          {'title': 'Playlist 2'},
+          {'title': 'Playlist 3'},
+          {'title': 'Playlist 4'},
+          {'title': 'Playlist 5'}
+        ])
+      }).render();
+      
+      var playlistView = new PlaylistView().render();
   // Trigger the initial route and enable HTML5 History API support, set the
   // root folder to '/' by default.  Change in app.js.
   Backbone.history.start({ pushState: true, root: app.root });

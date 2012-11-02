@@ -7,6 +7,6 @@ define([
   	model: PlaylistModel
   });
   // Return the model for the module
-  return model;
+  return collection;
 });
 

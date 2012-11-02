@@ -6,7 +6,7 @@ define([
   var view = Backbone.View.extend({
   	el: '.detail',
   	model: Playlist,
-  	template: _.template($('#plstr-tmpl-playlist').html()),
+  	template: _.template($('#plstr-tmpl-playlist-new-modal').html()),
   
   	render: function() {
 		$(this.el).html(this.template());

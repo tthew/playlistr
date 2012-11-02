@@ -13,7 +13,7 @@ require.config({
     jquery: "../scripts/libs/jquery",
     lodash: "../scripts/libs/lodash",
     backbone: "../scripts/libs/backbone",
-    underscore: "../scripts/libs/underscore"
+    underscore: "../scripts/libs/underscore",
   },
 
   shim: {

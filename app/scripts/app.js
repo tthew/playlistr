@@ -6,6 +6,7 @@ define([
 
   // Plugins.
   "plugins/backbone.layoutmanager",
+  "../components/bootstrap-js/bootstrap.js"
 
 ],
 
@@ -29,6 +30,7 @@ function($, _, Backbone) {
     },
 
     fetch: function(path) {
+
       path = path + ".html";
       // console.log(path);
       if (!JST[path]) {
