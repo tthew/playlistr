@@ -19,7 +19,7 @@
                     <a class="brand" href="#">Playlistr</a>
                     <ul class="nav pull-right">
                         <li>
-                        <a href="#plstr-new-playlist" role="button" class="pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i>  New Playlist</a>
+                        <a href="#plstr-new-playlist-modal" role="button" class="pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i>  New Playlist</a>
                         </li>
                     </ul>
                 </div>
@@ -29,37 +29,36 @@
             <div id="plstr-sidebar" class="sidebar span2">
                 
             </div>
-
-            <div id="plstr-main" class="main" class="span10">
-                
+            <div id="plstr-main" class="main span10">
+            
             </div>
         </div>
 
         <div id="plstr-modal"></div>
-        <div id="plstr-new-playlist" class="modal hide fade">
+
+        
+        <form id="plstr-new-playlist-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newPlaylist" aria-hidden="true">
+        
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>New Playlist</h3>
         </div>
         <div class="modal-body">
-            <form>
+            
                 <fieldset>
                     <label>Title</label>
-                    <input ng-model="playlistTitle" type="text" placeholder="My Playlist" />
+                    <input name="title" type="text" placeholder="My Playlist" />
                     <label>Description</label>
-                    <textarea ng-model="playlistDescription"></textarea>
+                    <textarea name="description"></textarea>
                 </fieldset>
-            </form>
+            
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" ng-click="closeModal()">Close</a>
-            <a href="#" class="btn btn-primary" ng-click="createNewPlaylist()">Create Playlist</a>
+            <button href="#" class="btn plstr-close">Close</button>
+            <button type="submit" href="#" class="btn btn-primary">Create Playlist</button>
         </div>
-        </div>
+        </form>
 
-        <script type="text/html" id="plstr-tmpl-new-playlist-modal">
-       
-        </script>
         <script type="text/html" id="plstr-tmpl-playlists">
             <ul class="nav nav-list">
                 
@@ -67,7 +66,7 @@
         </script>
 
         <script type="text/html" id="plstr-tmpl-playlist-list-item">
-            <li><%= title %></li>
+            <%= title %><a href="#" class="delete"><i class="icon-trash"></i></a>
         </script>
 
         <script type="text/html" id="plstr-tmpl-sound-item">
@@ -75,34 +74,56 @@
             <td><%= title %><br /><img class="span6 waveform" src="<%= waveform_url %>" alt= "" /></td>
         </script>
         <script type="text/html" id="plstr-tmpl-playlist-detail">
+        
             <div class="span8">
             <h1><%= title %></h1>
             <p><%= description %></p>
             <p><a class="btn start play"><i class="icon-play"></i> Play All</a> <a class="btn pause"><i class="icon-pause"></i> Pause</a> <a class="btn stop"><i class="icon-stop"></i> Stop</a></p>
             <table class="table playlist">
-            <thead>
-                <tr>
-                    <th class='playing'>&nbsp;</th>
-                    <th>Track</th>
-                </tr>
-            </thead>
-            <tbody>
+                <thead>
+                    <tr>
+                        <th class='playing'>&nbsp;</th>
+                        <th>Track</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <form id="plstr-form-add-sound" class="form form-inline">
+                                <fieldset>
+                                    <label>Add Sound:</label> 
+                                    <input name="uri" placeholder="Enter Soundcloud Url" /> 
+                                    <button type="submit" class="btn">Add Sound</button>
+                                </fieldset>
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
             </div>
 
-            <div class="span2">
-                <form class="form">
+            <div class="span1 offset1">
+                <form id="plstr-playlist-details" class="form">
                     <fieldset>
                         <label>Title</label>
-                        <input type="text" value="<%= title %>" />
+                        <input name="title" type="text" value="<%= title %>" />
                         <label>Description</label>
-                        <textarea><%= description %></textarea>   
-                        <div><a class="btn">Save Changes</a></div>
+                        <textarea name="description"><%= description %></textarea>   
+                        <button class="btn">Save Changes</button>
                     </fieldset>
                 </form>
             </div>
+        
+
+        </script>
+        <script type="text/html" id="plstr-alert">
+            <div class="alert alert-<%= type %>">
+            <%= message %>
+            </div>
+        </script>
         </script>
 
         <!--[if lt IE 7]>

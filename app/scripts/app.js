@@ -9,13 +9,14 @@ define([
   "collections/sounds-collection",  
   "views/playlists-view",
   "views/playlist-detail-view",
-  
+  "views/new-playlist-form-modal",
+
   // Plugins.
   "../components/bootstrap-js/bootstrap.js"
 
 ],
 
-function($, _, Marionette, Vent, ModalRegion, PlaylistsCollection, SoundsCollection, PlaylistsView, PlaylistDetailView) {
+function($, _, Marionette, Vent, ModalRegion, PlaylistsCollection, SoundsCollection, PlaylistsView, PlaylistDetailView, NewPlaylistFormModalView) {
 
   var Playlistr = new Marionette.Application();
 
