@@ -62,11 +62,16 @@ define([
         });
 
         Vent.bind("sound:pause", function() {
-          sound.pause();
+          if (sound.paused) {
+            sound.resume();
+          } else {
+            sound.pause();  
+          }
+          
         })
 
         Vent.bind("sound:resume", function() {
-          sound.play();
+          sound.resume();
         });
 
         if (!self.model.get('playing')) {
