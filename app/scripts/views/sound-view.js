@@ -18,6 +18,7 @@ define([
       this.model.on('change', this.render, this);
 
       Vent.on("sound:play", function(model) {
+
         if (model.cid == self.model.cid) {
           self.stopSound
           self.streamSound();
@@ -26,7 +27,6 @@ define([
 
       Vent.bind("sound:finished", function() {
         self.model.set("playing", false);
-        self.className = '';
       });
 
       Vent.bind("sound:stop", function() {
@@ -46,33 +46,34 @@ define([
       self.className = 'playing';
       SC.stream("/tracks/" + this.model.get('id'), function(sound) {
         self.sound = sound;
-        Vent.bind("sound:play", function(model) {
-          if (!model) {
-            sound.play(); 
-            return;
-          }
+        
+        // Vent.bind("sound:play", function(model) {
+        //   if (!model) {
+        //     sound.play(); 
+        //     return;
+        //   }
 
-          if (model.get('id') == self.model.get('id')) {
-            if (self.model.get('playing') == false) {
-              sound.play();            
-            }
-          } else {
-            self.stopSound();  
-          }
-        });
+        //   if (model.get('id') == self.model.get('id')) {
+        //     if (self.model.get('playing') == false) {
+        //       sound.play();            
+        //     }
+        //   } else {
+        //     self.stopSound();  
+        //   }
+        // });
 
-        Vent.bind("sound:pause", function() {
-          if (sound.paused) {
-            sound.resume();
-          } else {
-            sound.pause();  
-          }
+        // Vent.bind("sound:pause", function() {
+        //   if (sound.paused) {
+        //     sound.resume();
+        //   } else {
+        //     sound.pause();  
+        //   }
           
-        })
+        // })
 
-        Vent.bind("sound:resume", function() {
-          sound.resume();
-        });
+        // Vent.bind("sound:resume", function() {
+        //   sound.resume();
+        // });
 
         if (!self.model.get('playing')) {
           sound.onPosition(self.model.get('duration') - 1000, function() {

@@ -14,21 +14,28 @@ require.config({
     lodash: "../scripts/libs/lodash",
     backbone: "../scripts/libs/backbone",
     underscore: "../scripts/libs/underscore",
-    marionette: "../components/backbone.marionette/lib/backbone.marionette"
+    marionette: "../components/backbone.marionette/lib/backbone.marionette",
+
+    // Plugins
+    // 
+    localStorage: "../components/Backbone.localStorage/backbone.localStorage"
   },
 
   shim: {
     // Backbone library depends on lodash and jQuery.
-    '../components/Backbone.localStorage/backbone.localStorage' : ['backbone'],
+
     backbone: {
       deps: ["lodash", "jquery"],
       exports: "Backbone"
     },
-
     marionette: {
       deps: ['backbone'],
       exports: 'Backbone.Marionette'
     },
+    'localStorage' : ['backbone'],
+
+
+    
 
     // Backbone.LayoutManager depends on Backbone.
     // "plugins/backbone.layoutmanager": ["backbone"],

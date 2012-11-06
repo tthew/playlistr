@@ -3,7 +3,8 @@ define([
   	'backbone',
   	'marionette',
   	'vent',
-], function(_, Backbone, Marionette, Vent){
+    'collections/sounds-collection'
+], function(_, Backbone, Marionette, vent, Sounds){
   return Backbone.View.extend({
   	el: "body",
   	events: {
@@ -13,9 +14,10 @@ define([
   	newPlaylist: function(e) {
   		e.preventDefault();
   		
-  		Vent.trigger('playlist:create', {
+  		vent.trigger('playlist:create', {
   			title: this.$('form#plstr-new-playlist-modal input[name=title]').val(),
-  			description: this.$('form#plstr-new-playlist-modal textarea[name=description]').val()
+  			description: this.$('form#plstr-new-playlist-modal textarea[name=description]').val(),
+        // sounds: new Sounds()
   		});
 
   		this.closeModal();

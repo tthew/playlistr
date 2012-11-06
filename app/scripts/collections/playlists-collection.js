@@ -1,12 +1,32 @@
+/**
+ * Playlistr 
+ *
+ * A Soundcloud playlisting application
+ *
+ * @package Playlistr
+ * @author Matt Richards
+ * @copyright Copyright (c) 2012, Matt Richards
+ * @licence http://opensource.org/licenses/MIT
+ * @link http://lucidmoon.co.uk
+ */
+
 define([
 	'lodash',
   	'backbone',
     'vent',
   	'models/playlist-model',
     'views/alert-view',
-  	'../../components/Backbone.localStorage/backbone.localStorage'
+  	'localStorage'
 
-], function(_, Backbone, Vent, PlaylistModel, AlertView){
+], 
+
+/**
+ * Playlists Collection
+ * @name    PlaylistsCollection
+ * @class   PlaylistsCollection
+ * @constructor
+ */
+function(_, Backbone, Vent, PlaylistModel, AlertView){
  	return Backbone.Collection.extend({
   		model: PlaylistModel,
   		localStorage: new Backbone.LocalStorage('plstr-playlists'),
@@ -14,17 +34,6 @@ define([
   		initialize: function() {
   			var self = this;
         this.fetch();
-        Vent.bind('playlist:create', function(playlist) {
-          console.log(playlist);
-          self.create({
-            title: playlist.title,
-            description: playlist.description
-          },{
-            success: function() {
-              var alert = new AlertView({'message': '\'<strong>' + playlist.title + '</strong>\' succesfully created','type':'success'});
-            }
-          });
-        })
   		}
   	});
 });

@@ -3,7 +3,7 @@ define([
   'backbone',
   'vent',
   'models/sound-model',
-  '../../components/Backbone.localStorage/backbone.localStorage'
+  'localStorage'
 
 ], function(_, Backbone, Vent, Sound){
  	return Backbone.Collection.extend({

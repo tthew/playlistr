@@ -8,7 +8,7 @@ define([
 
     initialize: function() {
       if (_.isUndefined(this.options.message)) {
-        throw new Error('Alert expected a message to display');
+        throw new Error('AlertView: Expected a message but none was found');
         return;
       }
 
@@ -18,7 +18,13 @@ define([
     render: function() {
       var self = this;
       this.el = this.template(this.options);
-      this.el = $(this.el).hide();
+      console.log($(this.el).outerWidth());
+      this.el = $(this.el).hide().css({
+        'position': 'fixed',
+        'left': '40%',
+        'top': '50px'
+      });
+
       $('body').append(this.el.fadeIn('slow'));
 
       setTimeout(function(){

@@ -9,18 +9,54 @@ define([
   "collections/sounds-collection",  
   "views/playlists-view",
   "views/playlist-detail-view",
+  "views/alert-view",
 
   // Plugins.
   "../components/bootstrap-js/bootstrap.js"
 
 ],
 
-function($, _, Marionette, Vent, ModalRegion, PlaylistsCollection, SoundsCollection, PlaylistsView, PlaylistDetailView, NewPlaylistFormModalView) {
+function($, _, Marionette, Vent, ModalRegion, PlaylistsCollection, SoundsCollection, PlaylistsView, PlaylistDetailView, AlertView) {
 
-  var Playlistr = new Marionette.Application();
+  var app = new Marionette.Application();
 
   var playlistsCollection = new PlaylistsCollection();
+
+  if (playlistsCollection.length == 0) {
+    $("#plstr-new-playlist-modal").modal("show");
+  }
   
+  app.addRegions({
+    nav: '#plstr-nav',
+    sidebar: '#plstr-sidebar',
+    main: '#plstr-main',
+    modal: ModalRegion
+  });
+
+  app.addInitializer(function() {
+    var viewOptions = {
+      collection: playlistsCollection
+    }
+  
+    app.sidebar.show(new PlaylistsView(viewOptions));
+
+  });
+
+  Vent.on("playlist:show", function(playlist) {
+    app.main.show(new PlaylistDetailView({
+      model: playlist,
+      collection: new SoundsCollection(playlist.get('sounds') || [])
+    }));
+  });
+
+  Vent.bind('playlist:create', function(playlist) {
+    playlistsCollection.create(playlist, {
+      success: function() {
+        var alert = new AlertView({'message': '\'<strong>' + playlist.title + '</strong>\' succesfully created','type':'success'});
+      }
+    });
+  });
+
   window.playlists = playlistsCollection;
 
   window.initDummyData = function() {
@@ -37,98 +73,6 @@ function($, _, Marionette, Vent, ModalRegion, PlaylistsCollection, SoundsCollect
     });
   };
 
-
-
-  Playlistr.addRegions({
-    nav: '#plstr-nav',
-    sidebar: '#plstr-sidebar',
-    main: '#plstr-main',
-    modal: ModalRegion
-  });
-
-  Playlistr.addInitializer(function() {
-    
-    var viewOptions = {
-      collection: playlistsCollection
-    }
-  
-    Playlistr.sidebar.show(new PlaylistsView(viewOptions));
-    Playlistr.main.show(new PlaylistDetailView());
-
-  });
-
-  return Playlistr;
-
-  // // Provide a global location to place configuration settings and module
-  // // creation.
-  // var app = {
-  //   // The root path to run the application.
-  //   root: "/"
-  // };
-
-  // // Localize or create a new JavaScript Template object.
-  // var JST = window.JST = window.JST || {};
-
-  // // Configure LayoutManager with Backbone Boilerplate defaults.
-  // Backbone.LayoutManager.configure({
-  //   paths: {
-  //     layout: "scripts/templates/layouts/",
-  //     template: "scripts/templates/"
-  //   },
-
-  //   fetch: function(path) {
-
-  //     path = path + ".html";
-  //     // console.log(path);
-  //     if (!JST[path]) {
-  //       $.ajax({ url: app.root + path, async: false }).then(function(contents) {
-  //         JST[path] = _.template(contents);
-  //       });
-  //     }
-
-  //     return JST[path];
-  //   }
-  // });
-
-  // // Mix Backbone.Events, modules, and layout management into the app object.
-  // return _.extend(app, {
-  //   // Create a custom object with a nested Views object.
-  //   module: function(additionalProps) {
-  //     return _.extend({ Views: {} }, additionalProps);
-  //   },
-
-  //   // Helper for using layouts.
-  //   useLayout: function(name) {
-
-  //     // If already using this Layout, then don't re-inject into the DOM.
-  //     if (this.layout && this.layout.options.template === name) {
-  //       return this.layout;
-  //     }
-
-  //     // If a layout already exists, remove it from the DOM.
-  //     if (this.layout) {
-  //       this.layout.remove();
-  //     }
-
-  //     // Create a new Layout.
-  //     var layout = new Backbone.Layout({
-  //       template: name,
-  //       className: "layout " + name,
-  //       id: "layout"
-  //     });
-
-  //     // Insert into the DOM.
-  //     $("#main").empty().append(layout.el);
-
-  //     // Render the layout.
-  //     layout.render();
-
-  //     // Cache the refererence.
-  //     this.layout = layout;
-
-  //     // Return the reference, for chainability.
-  //     return layout;
-  //   }
-  // }, Backbone.Events);
+  return app;
 
 });

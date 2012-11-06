@@ -7,8 +7,9 @@ define([
     'models/sound-model',    
     'views/sound-view',
     'views/alert-view',
+    'collections/sounds-collection'
     // 'model/sound-model'
-], function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView){
+], function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, SoundsCollection){
   return Marionette.CompositeView.extend({
   	template: _.template($('#plstr-tmpl-playlist-detail').html()),
     itemView: SoundView,
@@ -20,31 +21,28 @@ define([
       'submit form#plstr-playlist-details': 'updateDetails',
       'submit form#plstr-form-add-sound': 'addSoundToPlaylist'
     },
-  
+
     initialize: function() {
       var self = this;
 
-      Vent.on('playlist:show', function(playlist) {
-        console.log('show!');
-        self.model = playlist;
-        self.collection = new Backbone.Collection(playlist.get('sounds'));
-        self.collection.on('change', self.render);
-        self.model.on('change', self.render);
-        // self.model.get('sounds').on('change', self.render);
-        self.render();
-      });
+      self.model.on('change', self.render)
+      self.collection.on('change', self.render);
 
       Vent.on('playlist:next', function(previousSound) {
+        // Does next track exist?
         if (_.isObject(self.collection.models[_.indexOf(self.collection.models, previousSound) + 1])) {
-          // Does next track exist?
+          Vent.trigger('sound:stop');
           Vent.trigger('sound:play', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
-
         }
-        // console.log(_.indexOf(self.collection.models,previousSound.cid));
-        // .indexOf(previousSound));
-        // previousSound.set('playing', false);
       });
 
+      /* playlist:play application event listener */
+      Vent.on('playlist:play', function() {
+        console.log('playlist:play');
+        console.log(self.collection);
+        Vent.trigger('sound:stop');
+        Vent.trigger('sound:play', self.collection.models[0]);
+      });
 
     },
 
@@ -57,7 +55,7 @@ define([
     },
 
     play: function() {
-      Vent.trigger('sound:play');
+      Vent.trigger('sound:play', this.collection.models[0]);
     },
 
     updateDetails: function(e) {
@@ -91,16 +89,16 @@ define([
         if (_.has(response,'kind') && response.kind === 'track') {
           var sounds;
           response.playing = false;
-          sounds = self.model.get('sounds');
+          sounds = self.model.get('sounds') || [];
           sounds.push(response)
           self.model.save({'sounds':sounds});
+          self.collection = new SoundsCollection(self.model.get('sounds'));
           Vent.trigger('playlist:show', self.model);
         } else {
           /* TODO: Handle Error */
           console.log('not a sound');
           console.log(response);
         }
-        
       });
     }
   });
