@@ -9,7 +9,6 @@ define([
   "collections/sounds-collection",  
   "views/playlists-view",
   "views/playlist-detail-view",
-  "views/new-playlist-form-modal",
 
   // Plugins.
   "../components/bootstrap-js/bootstrap.js"

@@ -34,7 +34,16 @@ define([
         self.render();
       });
 
+      Vent.on('playlist:next', function(previousSound) {
+        if (_.isObject(self.collection.models[_.indexOf(self.collection.models, previousSound) + 1])) {
+          // Does next track exist?
+          Vent.trigger('sound:play', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
 
+        }
+        // console.log(_.indexOf(self.collection.models,previousSound.cid));
+        // .indexOf(previousSound));
+        // previousSound.set('playing', false);
+      });
 
 
     },
@@ -67,9 +76,12 @@ define([
     },
 
     addSoundToPlaylist: function(e) {
-      var self = this;
+      var self = this,
+          url;
+      
       e.preventDefault();
-      var url = this.$('form#plstr-form-add-sound input[name=uri]').val();
+      url = this.$('form#plstr-form-add-sound input[name=uri]').val();
+
       SC.get('/resolve', {url: url}, function(response) {
         if (_.has(response, 'errors')) {
           var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
@@ -77,18 +89,14 @@ define([
         }
 
         if (_.has(response,'kind') && response.kind === 'track') {
-          
+          var sounds;
           response.playing = false;
-
-          var sounds = self.model.get('sounds');
+          sounds = self.model.get('sounds');
           sounds.push(response)
           self.model.save({'sounds':sounds});
           Vent.trigger('playlist:show', self.model);
-          
-         
-          
-
         } else {
+          /* TODO: Handle Error */
           console.log('not a sound');
           console.log(response);
         }

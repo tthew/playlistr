@@ -17,8 +17,12 @@
 	background: none;
 }
 
-table.table tr .playing {
+table.table tr .icon {
 	width: 16px;
+}
+
+table.table tr .playing {
+	background-color: rgba(0,255,0,0.1);
 }
 
 .playlist .waveform {

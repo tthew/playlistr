@@ -70,8 +70,8 @@
         </script>
 
         <script type="text/html" id="plstr-tmpl-sound-item">
-            <td class="playing"><% if (playing) { %><i class="icon-play"></i><% } %></td>
-            <td><%= title %><br /><img class="span6 waveform" src="<%= waveform_url %>" alt= "" /></td>
+            <td class="icon <%= playing ? 'playing' :'' %>"><% if (playing) { %><i class="icon-play"></i><% } %></td>
+            <td class="<%= playing ? 'playing' :'' %>"><%= title %><br /><img class="span6 waveform" src="<%= waveform_url %>" alt= "" /></td>
         </script>
         <script type="text/html" id="plstr-tmpl-playlist-detail">
         
@@ -82,7 +82,7 @@
             <table class="table playlist">
                 <thead>
                     <tr>
-                        <th class='playing'>&nbsp;</th>
+                        <th class='icon'>&nbsp;</th>
                         <th>Track</th>
                     </tr>
                 </thead>

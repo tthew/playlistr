@@ -111,7 +111,7 @@ module.exports = function( grunt ) {
     // the staging directory used during the process
     staging: 'temp',
     // final build output
-    output: 'dist',
+    output: 'dist/public',
 
     mkdirs: {
       staging: 'app/'

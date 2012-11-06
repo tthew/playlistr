@@ -14,21 +14,39 @@ define([
     },
 
     initialize: function() {
+      var self = this;
       this.model.on('change', this.render, this);
+
+      Vent.on("sound:play", function(model) {
+        if (model.cid == self.model.cid) {
+          self.stopSound
+          self.streamSound();
+        }
+      });
+
+      Vent.bind("sound:finished", function() {
+        self.model.set("playing", false);
+        self.className = '';
+      });
+
+      Vent.bind("sound:stop", function() {
+        self.stopSound();
+      });
     },
 
-    click: function() {
+    stopSound: function() {
+      if (this.sound) {
+        this.sound.stop();
+        this.model.set('playing', false);  
+      }
+    },
+
+    streamSound: function() {
       var self = this;
-      
-      
+      self.className = 'playing';
       SC.stream("/tracks/" + this.model.get('id'), function(sound) {
-        var stopSound = function() {
-          sound.stop();
-          self.model.set('playing', false);
-        };
-
+        self.sound = sound;
         Vent.bind("sound:play", function(model) {
-
           if (!model) {
             sound.play(); 
             return;
@@ -36,15 +54,11 @@ define([
 
           if (model.get('id') == self.model.get('id')) {
             if (self.model.get('playing') == false) {
-              sound.play();
+              sound.play();            
             }
           } else {
-            stopSound();  
+            self.stopSound();  
           }
-        });
-
-        Vent.bind("sound:stop", function() {
-          stopSound();
         });
 
         Vent.bind("sound:pause", function() {
@@ -56,12 +70,22 @@ define([
         });
 
         if (!self.model.get('playing')) {
+          sound.onPosition(self.model.get('duration') - 1000, function() {
+            Vent.trigger("sound:finished");
+            Vent.trigger("playlist:next", self.model);
+          });
+
           sound.play();
           self.model.set('playing', true);
-          Vent.trigger("sound:play", self.model);
         }
           
-      })
+      });
+    },
+
+    click: function() {
+      var self = this;
+      Vent.trigger("sound:stop");
+      self.streamSound()
     }
 
   });
