@@ -123,6 +123,19 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    */
   app.sidebar.show(new PlaylistsView(viewOptions));
 
+
+  /**
+   * Initialise Soundcloud SDK
+   * @see  
+   */
+  if (window.SC) {
+    window.SC.initialize({
+      client_id: '4fb5b0db1d4852e4b1487a0254a74b70'
+    });
+  } else {
+    throw new Error("Playlistr: required dependency Soundcloud Javascipr SDK is missing");
+  }
+
   return app;
 
 });
