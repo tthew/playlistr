@@ -30,6 +30,7 @@ define([
  * @return {Object} Marionette.ItemView
  */
 function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView){
+  'use strict';
   return Marionette.ItemView.extend({
     /**
      * Tag name
@@ -68,7 +69,8 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView)
      * @memberOf PlaylistListItemView
      */
     click: function() {
-      vent.trigger('playlist:show', this.model);
+      Backbone.history.navigate('/playlist/' + this.model.id, true)
+      // vent.trigger('playlist:show', this.model);
     },
 
     /**
@@ -84,7 +86,8 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView)
         // Destroy Model
         this.model.destroy({
           success: function() {
-            // Display notification
+            // Trigger app:region:close:main application event
+            vent.trigger('app:region:close:main');
             var alert = new AlertView({'message': '\'<strong>' + title + '</strong>\' deleted succesfully','type':'success'});
           },
           error: function() {

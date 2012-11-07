@@ -33,6 +33,7 @@ define([
  * @return {Object} Marionette.CompositeView
  */
 function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, Sounds){
+  'use strict';
   return Marionette.CompositeView.extend({
     /**
      * Template

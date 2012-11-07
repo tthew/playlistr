@@ -27,6 +27,7 @@ define([
  * @return {Object} Backbone.View
  */
 function(_, Backbone, Marionette, vent, Sounds){
+  'use strict';
   return Backbone.View.extend({
     /**
      * View DOM element

@@ -13,8 +13,10 @@
 define([
   // Application.
   "app",
-    // Event Aggregator
-  "vent"
+  // Event Aggregator
+  "vent",
+  // Libraries
+  "marionette"
 ],
 /**
  * Application Router
@@ -23,39 +25,20 @@ define([
  * @constructor
  * @return {Backbone.Router} Backbone.Router
  */
-function(app, vent, Playlists) {
-
-  var Router = Backbone.Router.extend({
+function(app, vent, Marionette) {
+  'use strict';
+  var Router = Marionette.AppRouter.extend({
     /**
-     * Routes
+     * Application Routes
      * @memberOf Router
      * @type {Object}
      */
-    routes: {
+    appRoutes: {
       "": "index",
-      "add_sound/*uri": "add_sound"
-    },
-
-    /**
-     * Index route handler
-     * @memberOf Router
-     */
-    index: function() {
-    },
-
-    /**
-     * add_sound route handler
-     * @memberOf Router
-     */
-    add_sound: function(uri) {
-      // use route path data to pre-populate form
-      $("#plstr-bookmarklet-helper-modal input[name=uri]").val(uri);
-      /**
-       * Display modal
-       * @see http://twitter.github.com/bootstrap/javascript.html#modals
-       */
-      $("#plstr-bookmarklet-helper-modal").modal("show");
+      "playlist/:id": "playlist",
+      "add_sound/*uri": "addSound"
     }
+
   });
 
   return Router;

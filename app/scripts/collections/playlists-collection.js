@@ -28,6 +28,7 @@ define([
  * @return {Object} Backbone.Collection
  */
 function(_, Backbone, PlaylistModel){
+  'use strict';
  	return Backbone.Collection.extend({
      /**
       * Sound Model

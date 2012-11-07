@@ -25,6 +25,7 @@ define([
  * @return {Object} Marionette.CompositeView
  */
 function(_, Backbone, Marionette, PlaylistListItemView){
+  'use strict';
   return Marionette.CompositeView.extend({
     /**
      * Template

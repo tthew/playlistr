@@ -1,38 +1,58 @@
 @import "compass_twitter_bootstrap";
 
-.main-content {
-	margin-top: 50px;
+.plstr {
+	.main-content {
+		margin-top: 50px;
+	}
+
+	.sidebar {
+		li:hover {
+			cursor: pointer;
+		}
+
+		li:hover, a:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.playlists {
+		
+		li .delete {
+			display: none;
+		}
+
+		li:hover .delete {
+			margin: 0 0 0 0.5em; 
+			padding: 0;
+			display: inline;
+			background: none;
+		}
+	}
+
+	table.table {
+		tr .icon {
+			width: 16px;
+		}
+		tr .playing {
+			background-color: rgba(0,255,0,0.1);
+		}
+	}
+
+	.playlist {
+		.waveform {
+			background: #444;
+		}	
+
+		tr {
+			cursor: pointer;
+		}
+
+		tr:hover td {
+			background-color: rgba(0,0,255,0.1);
+		}	
+	}
 }
 
-.sidebar {
-	// border: 1px solid #ccc;
-}
 
-.playlists li .delete {
-	display: none;
-}
 
-.playlists li:hover .delete {
-	display: inline;
-	background: none;
-}
 
-table.table tr .icon {
-	width: 16px;
-}
-
-table.table tr .playing {
-	background-color: rgba(0,255,0,0.1);
-}
-
-.playlist .waveform {
-	background: #444;
-}
-
-.playlist tr {
-	cursor: pointer;
-}
-
-.playlist tr:hover td {
-	background-color: rgba(0,0,255,0.1);
-}

@@ -24,26 +24,13 @@ require([
  * @class   Main
  * @constructor
  */
-function(Playlistr, Router, ApplicationView) {
+function(app, Router, ApplicationView) {
+  'use strict';
+
   /**
-   * Start application
+   * Start the application
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.application.md
    */
-  Playlistr.start();
-
-  /**
-   * Initialise application Router
-   * @type {Object}
-   */
-  Playlistr.router = new Router();
-
-  /**
-   * Start backbone History
-   */
-  Backbone.history.start();
-
-  /**
-   * Initialise application view
-   */
-  var view = new ApplicationView();
+  app.start();
+  
 });

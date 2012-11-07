@@ -23,6 +23,7 @@ define([
  * @return {Object} Backbone.View
  */
 function(_, Backbone, Marionette){
+  'use strict';
   return Backbone.View.extend({
 
     /**

@@ -22,10 +22,11 @@ define([
  * @return {Object} Backbone.Model
  */
 function(_, Backbone){
-  return Backbone.Model.extend({
-  	defaults: {
-      playing: false
-    }
-  });
+	'use strict';
+	return Backbone.Model.extend({
+		defaults: {
+		  playing: false
+		}
+  	});
   
 });

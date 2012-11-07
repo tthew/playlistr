@@ -29,6 +29,7 @@ define([
  * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
  */
 function(_, Backbone, Marionette, vent, Sound){
+  'use strict';
   return Marionette.ItemView.extend({
     /**
      * Tag name
