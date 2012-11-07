@@ -110,8 +110,6 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
   });
 
   vent.on('playlist:addsoundbyurl', function(options) {
-    console.log('Add sound by url');
-
     SC.get('/resolve', {url: options.url}, function(response) {
         // Response has errors?
         if (_.has(response, 'errors')) {
@@ -119,7 +117,6 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
           var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
           return;
         }
-
         // Basic response validation
         if (_.has(response,'kind') && response.kind === 'track') {
           // We've got a track
@@ -127,12 +124,12 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
           response.playing = false;
           /**
            * Hacky stuff to work around Marionette/localStorage 
-           * @todo refactor this! 
+           * @todo refactor! 
            */
           sounds = options.model.get('sounds') || [];
           sounds.push(response)
           options.model.save({'sounds':sounds});
-          // self.collection = new Sounds(self.model.get('sounds'));
+          
           // Trigger playlist:show application event
           vent.trigger('playlist:show', options.model);
         } else {

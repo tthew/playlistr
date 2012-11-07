@@ -1,14 +1,18 @@
 <div class="span8">
 <h1><%= title %></h1>
 <p><%= description %></p>
+<% if (sounds.length > 0) { %>
 <p><a class="btn start play"><i class="icon-play"></i> Play</a> <a class="btn stop"><i class="icon-stop"></i> Stop</a></p>
+<% } %>
 <table class="table playlist">
+    <% if (sounds.length > 0) { %>
     <thead>
         <tr>
             <th class='icon'>&nbsp;</th>
             <th>Track</th>
         </tr>
     </thead>
+    <% } %>
     <tbody>
 
     </tbody>
