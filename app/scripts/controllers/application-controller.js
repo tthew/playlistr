@@ -19,7 +19,9 @@ define([
 	// Collections
   'collections/playlists-collection',
   // Views
-  'views/application-view'
+  'views/application-view',
+  // Templates
+  'text!templates/playlists-select.html'
 ], 
 /**
  * Application Controller
@@ -28,7 +30,7 @@ define([
  * @constructor
  * @return {Object} Controller
  */
-function(_, Backbone, Marionette, vent, Playlists, ApplicationView) {
+function(_, Backbone, Marionette, vent, Playlists, ApplicationView, PlaylistSelectTpl) {
     'use strict';
     
     /**
@@ -76,6 +78,13 @@ function(_, Backbone, Marionette, vent, Playlists, ApplicationView) {
     Controller.addSound =function(uri) {
       // use route path data to pre-populate form
       $("#plstr-bookmarklet-helper-modal input[name=uri]").val(uri);
+
+      var playlists = new Playlists();
+      var template = _.template(PlaylistSelectTpl, {list: playlists.toJSON()});
+
+      // Replace DOM placeholder with parsed template
+      $("#plstr-bookmarklet-helper-modal .plstr-playlists-select").replaceWith(template);
+
       /**
        * Display modal
        * @see http://twitter.github.com/bootstrap/javascript.html#modals

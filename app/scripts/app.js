@@ -109,6 +109,38 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
     });
   });
 
+  vent.on('playlist:addsoundbyurl', function(options) {
+    console.log('Add sound by url');
+
+    SC.get('/resolve', {url: options.url}, function(response) {
+        // Response has errors?
+        if (_.has(response, 'errors')) {
+          // If so show user a notification
+          var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
+          return;
+        }
+
+        // Basic response validation
+        if (_.has(response,'kind') && response.kind === 'track') {
+          // We've got a track
+          var sounds;
+          response.playing = false;
+          /**
+           * Hacky stuff to work around Marionette/localStorage 
+           * @todo refactor this! 
+           */
+          sounds = options.model.get('sounds') || [];
+          sounds.push(response)
+          options.model.save({'sounds':sounds});
+          // self.collection = new Sounds(self.model.get('sounds'));
+          // Trigger playlist:show application event
+          vent.trigger('playlist:show', options.model);
+        } else {
+          /** @todo Handle Error */
+        }
+      });
+  });
+
   /**
    * app:region:close:main application event listener
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.eventaggregator.md   
@@ -126,7 +158,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
 
   /**
    * Initialise Soundcloud SDK
-   * @see  
+   * @see http://developers.soundcloud.com/docs/api/sdks#javascript
    */
   if (window.SC) {
     window.SC.initialize({

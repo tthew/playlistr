@@ -110,36 +110,13 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
           url;
       
       e.preventDefault();
+
+      // Grab the URI/URL from the form
       url = this.$('form#plstr-form-add-sound input[name=uri]').val();
 
-      // Attempt to resolve API endpoint from URI
-      SC.get('/resolve', {url: url}, function(response) {
-        // Response has errors?
-        if (_.has(response, 'errors')) {
-          // If so show user a notification
-          var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
-          return;
-        }
+      // Trigger playlist:addsoundbyurl application event
+      vent.trigger("playlist:addsoundbyurl", {model: self.model, url: url});
 
-        // Basic response validation
-        if (_.has(response,'kind') && response.kind === 'track') {
-          // We've got a track
-          var sounds;
-          response.playing = false;
-          /**
-           * Hacky stuff to work around Marionette/localStorage 
-           * @todo refactor this! 
-           */
-          sounds = self.model.get('sounds') || [];
-          sounds.push(response)
-          self.model.save({'sounds':sounds});
-          self.collection = new Sounds(self.model.get('sounds'));
-          // Trigger playlist:show application event
-          vent.trigger('playlist:show', self.model);
-        } else {
-          /** @todo Handle Error */
-        }
-      });
     },
 
     /**

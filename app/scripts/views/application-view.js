@@ -18,6 +18,7 @@ define([
   'vent',
   // Collections
   'collections/sounds-collection',
+  'collections/playlists-collection',  
   // Templates
   'text!templates/bookmarklet.html'
 ], 
@@ -28,7 +29,7 @@ define([
  * @constructor
  * @return {Object} Backbone.View
  */
-function(_, Backbone, Marionette, vent, Sounds, bookmarkletTpl){
+function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
   'use strict';
   return Backbone.View.extend({
     /**
@@ -45,6 +46,7 @@ function(_, Backbone, Marionette, vent, Sounds, bookmarkletTpl){
      */
   	events: {
   		'submit form#plstr-new-playlist-modal' : 'newPlaylist',
+      'submit form#plstr-bookmarklet-helper-modal' : 'addSoundToPlaylist',
   		'click #plstr-new-playlist-modal .plstr-close' : 'closeModal'
   	},
 
@@ -74,6 +76,29 @@ function(_, Backbone, Marionette, vent, Sounds, bookmarkletTpl){
       // Close modal dialog
   		this.closeModal();
   	},
+
+    /**
+     * [addSoundToPlaylist description]
+     */
+    addSoundToPlaylist: function(e) {
+
+      e.preventDefault();
+
+      // Initialise Playlists Collection
+      var playlists = new Playlists();
+      // Retrieve Playlist by ID
+      var playlist = playlists.get(this.$('form#plstr-bookmarklet-helper-modal select').val());
+
+      if(!_.isUndefined(playlist)) {
+        // Trigger playlist:addsoundbyurl application events
+        vent.trigger("playlist:addsoundbyurl", {model: playlist, url: this.$('form#plstr-bookmarklet-helper-modal input[name=uri]').val()});  
+        // Trigger playlist:show application event
+        vent.trigger("playlist:show", playlist);
+        // Hide modal dialog
+        this.$('form#plstr-bookmarklet-helper-modal').modal('hide');
+      }
+      
+    },
 
     /**
      * Close modal dialog
