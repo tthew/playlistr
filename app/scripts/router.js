@@ -14,9 +14,7 @@ define([
   // Application.
   "app",
     // Event Aggregator
-  "vent",
-  // Views
-  "views/playlists-view"
+  "vent"
 ],
 /**
  * Application Router
@@ -25,7 +23,7 @@ define([
  * @constructor
  * @return {Backbone.Router} Backbone.Router
  */
-function(app, vent, PlaylistsView, PlaylistView) {
+function(app, vent, Playlists) {
 
   var Router = Backbone.Router.extend({
     /**
@@ -43,7 +41,6 @@ function(app, vent, PlaylistsView, PlaylistView) {
      * @memberOf Router
      */
     index: function() {
-      console.log(this);
     },
 
     /**
@@ -53,7 +50,6 @@ function(app, vent, PlaylistsView, PlaylistView) {
     add_sound: function(uri) {
       // use route path data to pre-populate form
       $("#plstr-bookmarklet-helper-modal input[name=uri]").val(uri);
-
       /**
        * Display modal
        * @see http://twitter.github.com/bootstrap/javascript.html#modals

@@ -16,9 +16,7 @@ require([
   // Router.
   "router",
   // Views
-  "views/application-view",
-  "views/playlists-view",
-  "views/playlist-list-item-view"
+  "views/application-view"
 ],
 /**
  * Main module

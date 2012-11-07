@@ -28,7 +28,7 @@ define([
  * @return {Object} Marionette.ItemView
  * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
  */
-function(_, Backbone, Marionette, Vent, Sound){
+function(_, Backbone, Marionette, vent, Sound){
   return Marionette.ItemView.extend({
     /**
      * Tag name
@@ -61,7 +61,7 @@ function(_, Backbone, Marionette, Vent, Sound){
       var self = this;
       this.model.on('change', this.render, this);
 
-      Vent.on("sound:play", function(model) {
+      vent.on("sound:play", function(model) {
 
         if (model.cid == self.model.cid) {
           self.stopSound
@@ -69,11 +69,11 @@ function(_, Backbone, Marionette, Vent, Sound){
         }
       });
 
-      Vent.bind("sound:finished", function() {
+      vent.bind("sound:finished", function() {
         self.model.set("playing", false);
       });
 
-      Vent.bind("sound:stop", function() {
+      vent.bind("sound:stop", function() {
         self.stopSound();
       });
     },
@@ -105,9 +105,9 @@ function(_, Backbone, Marionette, Vent, Sound){
           // Setup event listener to trigger 1sec before end of track
           sound.onPosition(self.model.get('duration') - 1000, function() {
             // Trigger sound:finished application event
-            Vent.trigger("sound:finished");
+            vent.trigger("sound:finished");
             // Trigger playlist:next application event
-            Vent.trigger("playlist:next", self.model);
+            vent.trigger("playlist:next", self.model);
           });
 
           // Play sound
@@ -127,7 +127,7 @@ function(_, Backbone, Marionette, Vent, Sound){
       var self = this;
 
       // Trigger sound:stop application event
-      Vent.trigger("sound:stop");
+      vent.trigger("sound:stop");
 
       // Stream sound
       self.streamSound();

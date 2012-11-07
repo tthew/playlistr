@@ -32,7 +32,7 @@ define([
  * @constructor
  * @return {Object} Marionette.CompositeView
  */
-function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, SoundsCollection){
+function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, Sounds){
   return Marionette.CompositeView.extend({
     /**
      * Template
@@ -80,18 +80,18 @@ function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, S
       self.model.on('change', self.render)
       self.collection.on('change', self.render);
 
-      Vent.on('playlist:next', function(previousSound) {
+      vent.on('playlist:next', function(previousSound) {
         // Does next track exist?
         if (_.isObject(self.collection.models[_.indexOf(self.collection.models, previousSound) + 1])) {
-          Vent.trigger('sound:stop');
-          Vent.trigger('sound:play', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
+          vent.trigger('sound:stop');
+          vent.trigger('sound:play', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
         }
       });
 
       /* playlist:play application event listener */
-      Vent.on('playlist:play', function() {
-        Vent.trigger('sound:stop');
-        Vent.trigger('sound:play', self.collection.models[0]);
+      vent.on('playlist:play', function() {
+        vent.trigger('sound:stop');
+        vent.trigger('sound:play', self.collection.models[0]);
       });
 
     },
@@ -130,9 +130,9 @@ function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, S
           sounds = self.model.get('sounds') || [];
           sounds.push(response)
           self.model.save({'sounds':sounds});
-          self.collection = new SoundsCollection(self.model.get('sounds'));
+          self.collection = new Sounds(self.model.get('sounds'));
           // Trigger playlist:show application event
-          Vent.trigger('playlist:show', self.model);
+          vent.trigger('playlist:show', self.model);
         } else {
           /** @todo Handle Error */
         }
@@ -168,7 +168,7 @@ function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, S
      * @memberOf PlaylistDetailView
      */
     stop: function() {
-      Vent.trigger('sound:stop');
+      vent.trigger('sound:stop');
     },
 
     /**
@@ -176,7 +176,7 @@ function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, S
      * @memberOf PlaylistDetailView
      */
     pause: function() {
-      Vent.trigger('sound:pause');
+      vent.trigger('sound:pause');
     },
 
     /**
@@ -184,7 +184,7 @@ function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, S
      * @memberOf PlaylistDetailView
      */
     play: function() {
-      Vent.trigger('sound:play', this.collection.models[0]);
+      vent.trigger('sound:play', this.collection.models[0]);
     }
   });
 });

@@ -29,11 +29,28 @@ define([
  */
 function(_, Backbone, PlaylistModel){
  	return Backbone.Collection.extend({
-  		model: PlaylistModel,
+     /**
+      * Sound Model
+      * @type {Object}
+      */  		
+      model: PlaylistModel,
+
+      /**
+       * local storage
+       * @see https://github.com/jeromegn/Backbone.localStorage
+       */
   		localStorage: new Backbone.LocalStorage('plstr-playlists'),
 
+      /**
+       * Constructor
+       * @memberOf PlaylistsCollection
+       */
   		initialize: function() {
   			var self = this;
+        /**
+         * Fetch collection from storage
+         * @see https://github.com/jeromegn/Backbone.localStorage
+         */
         this.fetch();
   		}
   	});

@@ -29,7 +29,7 @@ define([
  * @constructor
  * @return {Object} Marionette.ItemView
  */
-function(_, Backbone, Marionette, Vent, AlertView, Playlist, PlaylistDetailView){
+function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView){
   return Marionette.ItemView.extend({
     /**
      * Tag name
@@ -68,7 +68,7 @@ function(_, Backbone, Marionette, Vent, AlertView, Playlist, PlaylistDetailView)
      * @memberOf PlaylistListItemView
      */
     click: function() {
-      Vent.trigger('playlist:show', this.model);
+      vent.trigger('playlist:show', this.model);
     },
 
     /**

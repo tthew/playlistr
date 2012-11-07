@@ -14,13 +14,10 @@ define([
   // Libraries
 	'lodash',
   'backbone',
-  // Event Aggregator
-  'vent',
   // Models
   'models/sound-model',
   // Plugins
   'localStorage'
-
 ],
 /**
  * Sounds Collection
@@ -29,13 +26,31 @@ define([
  * @constructor
  * @return {Object} Backbone.Colletion
  */
- function(_, Backbone, Vent, Sound){
+ function(_, Backbone, Sound){
  	return Backbone.Collection.extend({
+     /**
+      * Sound Model
+      * @type {Object}
+      */
   		model: Sound,
+
+      /**
+       * local storage
+       * @see https://github.com/jeromegn/Backbone.localStorage
+       */
   		localStorage: new Backbone.LocalStorage('plstr-playlists'),
 
+      /**
+       * Constructor
+       * @memberOf Sounds
+       */
   		initialize: function() {
         var self = this;
+
+        /**
+         * Fetch collection from storage
+         * @see https://github.com/jeromegn/Backbone.localStorage
+         */
         this.fetch();
   		}
   	});

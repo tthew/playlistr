@@ -14,8 +14,6 @@ define([
   'lodash',
   'backbone',
   'marionette',
-  // Collections
-  'collections/playlists-collection',
   // Views
   'views/playlist-list-item-view'
 ], 
@@ -26,7 +24,7 @@ define([
  * @constructor
  * @return {Object} Marionette.CompositeView
  */
-function(_, Backbone, Marionette, PlaylistsCollection, PlaylistListItemView){
+function(_, Backbone, Marionette, PlaylistListItemView){
   return Marionette.CompositeView.extend({
     /**
      * Template

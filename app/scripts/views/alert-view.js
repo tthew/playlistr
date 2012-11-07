@@ -10,9 +10,10 @@
  * @link http://lucidmoon.co.uk
  */
 define([
+  // Libraries
 	'lodash',
-  	'backbone',
-    'marionette'
+  'backbone',
+  'marionette'
 ], 
 /**
  * AlertView
