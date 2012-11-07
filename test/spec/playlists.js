@@ -6,7 +6,7 @@ define([
 ], function(Playlists) {
   'use strict';
 
-  describe("app", function() {
+  describe("Playlists", function() {
     it("1 == 1", function() {
       expect(1).to.equal(1);
     });
