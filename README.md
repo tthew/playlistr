@@ -1,5 +1,5 @@
 # Playlistr
-An HTML5 [Soundcloud](http://www.soundcloud.com) playlisting application built with [Backbone](http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCIQFjAA&url=http%3A%2F%2Fbackbonejs.org%2F&ei=mW2aUNfLJcfRhAfW1YCoAQ&usg=AFQjCNEQiFXPSOG9TaqO8NIjr09_aBVI1w), [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette), [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage), [RequireJS](http://http://requirejs.org/), the [Mocha](http://visionmedia.github.com/mocha/) test framework and  [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for good looks, out-of-the-box.
+A [Soundcloud](http://www.soundcloud.com) playlisting application built with [Backbone](http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCIQFjAA&url=http%3A%2F%2Fbackbonejs.org%2F&ei=mW2aUNfLJcfRhAfW1YCoAQ&usg=AFQjCNEQiFXPSOG9TaqO8NIjr09_aBVI1w), [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette), [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage), [RequireJS](http://http://requirejs.org/), the [Mocha](http://visionmedia.github.com/mocha/) test framework and  [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for good looks, out-of-the-box.
 
 
 ## Usage
@@ -38,6 +38,14 @@ To run the Mocha test suite, open up a terminal and enter in the following:
 ## Demo
 
 There is a web accesible demo available over here: [http://lit-cove-2242.herokuapp.com ](http://lit-cove-2242.herokuapp.com)
+
+## Todo
+
+* Finish off Bookmarklet implementation
+* Implement on demand template management with RequireJS
+* Robust tests + fully passing test suite
+* Refactoring 
+
 
 ## License
 
