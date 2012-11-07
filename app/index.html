@@ -19,7 +19,10 @@
                     <a class="brand" href="#">Playlistr</a>
                     <ul class="nav pull-right">
                         <li>
-                        <a href="#plstr-new-playlist-modal" role="button" class="pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i>  New Playlist</a>
+                            <a href="#plstr-new-playlist-modal" role="button" class="pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i>  New Playlist</a>
+                        </li>
+                        <li>
+                            <a onclick="return false;" href="javascript:javascript:(function(s){try{s=document.selection.createRange().text}catch(_){s=document.getSelection()}window.open('http://localhost:3501/#/add_sound/'+encodeURI(location)+'\n'+s)})()" role="button" class="pull-right" data-toggle="modal"><i class="icon-plus icon-white"></i>  Add to Playlistr (bookmarklet)</a>
                         </li>
                     </ul>
                 </div>
@@ -47,9 +50,31 @@
             
                 <fieldset>
                     <label>Title</label>
-                    <input name="title" type="text" placeholder="My Playlist" />
+                    <input required title="Please enter a title" name="title" type="text" placeholder="My Playlist" />
                     <label>Description</label>
                     <textarea name="description"></textarea>
+                </fieldset>
+            
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn plstr-close">Close</button>
+            <button type="submit" href="#" class="btn btn-primary">Create Playlist</button>
+        </div>
+        </form>
+
+        <form id="plstr-bookmarklet-helper-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addSound" aria-hidden="true">
+        
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Add Sound</h3>
+        </div>
+        <div class="modal-body">
+            
+                <fieldset>
+                    <label>Sound</label>
+                    <input name="uri" type="text" placeholder="URI" />
+                    <label>Playlist</label>
+                    <select></select>
                 </fieldset>
             
         </div>
