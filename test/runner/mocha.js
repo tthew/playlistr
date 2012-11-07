@@ -9,7 +9,9 @@ require({
 }, [
 
 // Load specs
-'spec/example'
+'spec/playlists',
+'spec/sounds',
+'spec/app'
 
 ], function() {
   'use strict';
