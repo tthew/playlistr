@@ -11,13 +11,13 @@
  */
 
 define([
-	'lodash',
-  	'backbone',
-    'vent',
-  	'models/playlist-model',
-    'views/alert-view',
-  	'localStorage'
-
+  // Libraries
+  'lodash',
+  'backbone',
+  // Models
+	'models/playlist-model',
+  // Plugins
+	'localStorage'
 ], 
 
 /**
@@ -25,8 +25,9 @@ define([
  * @name    PlaylistsCollection
  * @class   PlaylistsCollection
  * @constructor
+ * @return {Object} Backbone.Collection
  */
-function(_, Backbone, Vent, PlaylistModel, AlertView){
+function(_, Backbone, PlaylistModel){
  	return Backbone.Collection.extend({
   		model: PlaylistModel,
   		localStorage: new Backbone.LocalStorage('plstr-playlists'),

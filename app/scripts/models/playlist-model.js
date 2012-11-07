@@ -1,11 +1,31 @@
+/**
+ * Playlistr 
+ *
+ * A Soundcloud playlisting application
+ *
+ * @package Playlistr
+ * @author Matt Richards
+ * @copyright Copyright (c) 2012, Matt Richards
+ * @licence http://opensource.org/licenses/MIT
+ * @link http://lucidmoon.co.uk
+ */
+
 define([
+	// Libraries
 	'lodash',
-  	'backbone',
-  	'collections/sounds-collection'
-  	// '../../components/Backbone.localStorage/backbone.localStorage'
-], function(_, Backbone, SoundsCollection){
+	'backbone',
+	// Collections
+	'collections/sounds-collection'
+], 
+/**
+ * Playlists Model
+ * @name    PlaylistModel
+ * @class   PlaylistModel
+ * @constructor
+ * @return {Object} Backbone.Model
+ */
+function(_, Backbone, SoundsCollection){
 	return Backbone.Model.extend({
-		// localStorage: new Backbone.LocalStorage('plstr-playlists'),
 		defaults: {
 			'title': '',
 			'description': '',

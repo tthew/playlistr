@@ -1,18 +1,62 @@
+/**
+ * Playlistr 
+ *
+ * A Soundcloud playlisting application
+ *
+ * @package Playlistr
+ * @author Matt Richards
+ * @copyright Copyright (c) 2012, Matt Richards
+ * @licence http://opensource.org/licenses/MIT
+ * @link http://lucidmoon.co.uk
+ */
+
 define([
-	'lodash',
-  	'backbone',
-    'marionette',
-    'vent',
-  	'models/sound-model'
-], function(_, Backbone, Marionette, Vent, Sound){
+  // Libraries
+  'lodash',
+  'backbone',
+  'marionette',
+  // Event Aggregator
+  'vent',
+  // Models
+  'models/sound-model'
+], 
+/**
+ * Sound Item View
+ * @name    SoundView
+ * @class   SoundView
+ * @constructor
+ * @return {Object} Marionette.ItemView
+ * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
+ */
+function(_, Backbone, Marionette, Vent, Sound){
   return Marionette.ItemView.extend({
+    /**
+     * Tag name
+     * @type {String}
+     * @memberOf SoundView
+     */    
   	tagName: 'tr',
+
+    /**
+     * Template
+     * @type {Mixed}
+     * @memberOf SoundView
+     */    
     template: _.template($('#plstr-tmpl-sound-item').html()),
 
+    /**
+     * DOM event listeners
+     * @type {Mixed}
+     * @memberOf SoundView
+     */
     events: {
       "click": "click"
     },
 
+    /**
+     * Constructor
+     * @memberOf Soundview
+     */
     initialize: function() {
       var self = this;
       this.model.on('change', this.render, this);
@@ -34,6 +78,10 @@ define([
       });
     },
 
+    /**
+     * Stop sound from playing
+     * @memberOf SoundView
+     */
     stopSound: function() {
       if (this.sound) {
         this.sound.stop();
@@ -41,59 +89,48 @@ define([
       }
     },
 
+    /**
+     * Stream Sound
+     * @memberOf SoundView
+     * @todo better error handling
+     */
     streamSound: function() {
       var self = this;
-      self.className = 'playing';
+
+      // Initialise stream
       SC.stream("/tracks/" + this.model.get('id'), function(sound) {
         self.sound = sound;
-        
-        // Vent.bind("sound:play", function(model) {
-        //   if (!model) {
-        //     sound.play(); 
-        //     return;
-        //   }
-
-        //   if (model.get('id') == self.model.get('id')) {
-        //     if (self.model.get('playing') == false) {
-        //       sound.play();            
-        //     }
-        //   } else {
-        //     self.stopSound();  
-        //   }
-        // });
-
-        // Vent.bind("sound:pause", function() {
-        //   if (sound.paused) {
-        //     sound.resume();
-        //   } else {
-        //     sound.pause();  
-        //   }
-          
-        // })
-
-        // Vent.bind("sound:resume", function() {
-        //   sound.resume();
-        // });
-
+        // Is this sound already playing
         if (!self.model.get('playing')) {
+          // Setup event listener to trigger 1sec before end of track
           sound.onPosition(self.model.get('duration') - 1000, function() {
+            // Trigger sound:finished application event
             Vent.trigger("sound:finished");
+            // Trigger playlist:next application event
             Vent.trigger("playlist:next", self.model);
           });
 
+          // Play sound
           sound.play();
+
+          // Set playing attribute to true
           self.model.set('playing', true);
         }
-          
       });
     },
 
+    /**
+     * Click event handler
+     * @memberOf Soundview
+     */
     click: function() {
       var self = this;
-      Vent.trigger("sound:stop");
-      self.streamSound()
-    }
 
+      // Trigger sound:stop application event
+      Vent.trigger("sound:stop");
+
+      // Stream sound
+      self.streamSound();
+    }
   });
-  
 });

@@ -1,19 +1,67 @@
+/**
+ * Playlistr 
+ *
+ * A Soundcloud playlisting application
+ *
+ * @package Playlistr
+ * @author Matt Richards
+ * @copyright Copyright (c) 2012, Matt Richards
+ * @licence http://opensource.org/licenses/MIT
+ * @link http://lucidmoon.co.uk
+ */
 define([
-	'lodash',
-  	'backbone',
-    'marionette',
-    'vent',
-  	'models/playlist-model',
-    'models/sound-model',    
-    'views/sound-view',
-    'views/alert-view',
-    'collections/sounds-collection'
-    // 'model/sound-model'
-], function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, SoundsCollection){
+  // Libraries
+  'lodash',
+  'backbone',
+  'marionette',
+  // Event Aggregator
+  'vent',
+  // Models
+  'models/playlist-model',
+  'models/sound-model',    
+  // Views
+  'views/sound-view',
+  'views/alert-view',
+  // Collections
+  'collections/sounds-collection'
+], 
+/**
+ * Playlist Composite (Detail) View
+ * @name    PlaylistDetailView
+ * @class   PlaylistDetailView
+ * @constructor
+ * @return {Object} Marionette.CompositeView
+ */
+function(_, Backbone, Marionette, Vent, Playlist, Sound, SoundView, AlertView, SoundsCollection){
   return Marionette.CompositeView.extend({
+    /**
+     * Template
+     * @type {Mixed}
+     * @memberOf PlaylistDetailView
+     */
   	template: _.template($('#plstr-tmpl-playlist-detail').html()),
+
+    /**
+     * Item View 
+     * @type {Mixed}
+     * @memberOf  PlaylistDetailView
+     * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
+     */
     itemView: SoundView,
+
+    /**
+     * Item View Container
+     * @type {Mixed}
+     * @memberOf  PlaylistDetailView
+     * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
+     */
     itemViewContainer: 'tbody',
+
+    /**
+     * DOM event listeners
+     * @type {Mixed}
+     * @memberOf PlaylistDetailView
+     */
     events: {
       'click .stop': 'stop',
       'click .pause': 'pause',
@@ -22,6 +70,10 @@ define([
       'submit form#plstr-form-add-sound': 'addSoundToPlaylist'
     },
 
+    /**
+     * Constructor
+     * @memberOf PlaylistDetailView
+     */
     initialize: function() {
       var self = this;
 
@@ -38,26 +90,61 @@ define([
 
       /* playlist:play application event listener */
       Vent.on('playlist:play', function() {
-        console.log('playlist:play');
-        console.log(self.collection);
         Vent.trigger('sound:stop');
         Vent.trigger('sound:play', self.collection.models[0]);
       });
 
     },
 
-    stop: function() {
-      Vent.trigger('sound:stop');
+    /**
+     * Add sound to Playlist event handler
+     * @param {Object} e  Event
+     * @memberOf PlaylistDetailView
+     * @todo refactor, method is too long
+     */
+    addSoundToPlaylist: function(e) {
+      var self = this,
+          url;
+      
+      e.preventDefault();
+      url = this.$('form#plstr-form-add-sound input[name=uri]').val();
+
+      // Attempt to resolve API endpoint from URI
+      SC.get('/resolve', {url: url}, function(response) {
+        // Response has errors?
+        if (_.has(response, 'errors')) {
+          // If so show user a notification
+          var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
+          return;
+        }
+
+        // Basic response validation
+        if (_.has(response,'kind') && response.kind === 'track') {
+          // We've got a track
+          var sounds;
+          response.playing = false;
+          /**
+           * Hacky stuff to work around Marionette/localStorage 
+           * @todo refactor this! 
+           */
+          sounds = self.model.get('sounds') || [];
+          sounds.push(response)
+          self.model.save({'sounds':sounds});
+          self.collection = new SoundsCollection(self.model.get('sounds'));
+          // Trigger playlist:show application event
+          Vent.trigger('playlist:show', self.model);
+        } else {
+          /** @todo Handle Error */
+        }
+      });
     },
 
-    pause: function() {
-      Vent.trigger('sound:pause');
-    },
-
-    play: function() {
-      Vent.trigger('sound:play', this.collection.models[0]);
-    },
-
+    /**
+     * Playlist details update handler
+     * @param {Object} e Event
+     * @memberOf PlaylistDetailView
+     * @todo Handle save error
+     */
     updateDetails: function(e) {
       e.preventDefault();
       this.model.save(
@@ -68,39 +155,36 @@ define([
         {
           success: function() {
             var alert = new AlertView({message: 'Playlist details saved', type:'success'});
+          },
+          error: function() {
+           /** @todo Handle Error */
           }
         }
       );
     },
 
-    addSoundToPlaylist: function(e) {
-      var self = this,
-          url;
-      
-      e.preventDefault();
-      url = this.$('form#plstr-form-add-sound input[name=uri]').val();
+    /**
+     * Trigger sound:stop application event
+     * @memberOf PlaylistDetailView
+     */
+    stop: function() {
+      Vent.trigger('sound:stop');
+    },
 
-      SC.get('/resolve', {url: url}, function(response) {
-        if (_.has(response, 'errors')) {
-          var alert = new AlertView({message:'Ohhhhh Snaaaaaaap! There was a problem loading that sound.  Are you sure it was a Soundcloud URL?','type':'error'});
-          return;
-        }
+    /**
+     * Trigger sound:pause application event
+     * @memberOf PlaylistDetailView
+     */
+    pause: function() {
+      Vent.trigger('sound:pause');
+    },
 
-        if (_.has(response,'kind') && response.kind === 'track') {
-          var sounds;
-          response.playing = false;
-          sounds = self.model.get('sounds') || [];
-          sounds.push(response)
-          self.model.save({'sounds':sounds});
-          self.collection = new SoundsCollection(self.model.get('sounds'));
-          Vent.trigger('playlist:show', self.model);
-        } else {
-          /* TODO: Handle Error */
-          console.log('not a sound');
-          console.log(response);
-        }
-      });
+    /**
+     * Trigger sound:play application event
+     * @memberOf PlaylistDetailView
+     */
+    play: function() {
+      Vent.trigger('sound:play', this.collection.models[0]);
     }
   });
-  
 });
