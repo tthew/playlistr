@@ -37,7 +37,6 @@
         </div>
 
         <div id="plstr-modal"></div>
-
         
         <form id="plstr-new-playlist-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newPlaylist" aria-hidden="true">
         
@@ -82,73 +81,6 @@
             <button type="submit" href="#" class="btn btn-primary">Create Playlist</button>
         </div>
         </form>
-
-        <script type="text/html" id="plstr-tmpl-playlists">
-            <ul class="nav nav-list">
-                
-            </ul>
-        </script>
-
-        <script type="text/html" id="plstr-tmpl-playlist-list-item">
-            <%= title %><a href="#" class="delete"><i class="icon-trash"></i></a>
-        </script>
-
-        <script type="text/html" id="plstr-tmpl-sound-item">
-            <td class="icon <%= playing ? 'playing' :'' %>"><% if (playing) { %><i class="icon-play"></i><% } %></td>
-            <td class="<%= playing ? 'playing' :'' %>"><%= title %><br /><img class="span6 waveform" src="<%= waveform_url %>" alt= "" /></td>
-        </script>
-        <script type="text/html" id="plstr-tmpl-playlist-detail">
-        
-            <div class="span8">
-            <h1><%= title %></h1>
-            <p><%= description %></p>
-            <p><a class="btn start play"><i class="icon-play"></i> Play</a> <a class="btn stop"><i class="icon-stop"></i> Stop</a></p>
-            <table class="table playlist">
-                <thead>
-                    <tr>
-                        <th class='icon'>&nbsp;</th>
-                        <th>Track</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <form id="plstr-form-add-sound" class="form form-inline">
-                                <fieldset>
-                                    <label>Add Sound:</label> 
-                                    <input name="uri" placeholder="Enter Soundcloud Url" /> 
-                                    <button type="submit" class="btn">Add Sound</button>
-                                </fieldset>
-                            </form>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            </div>
-
-            <div class="span1 offset1">
-                <form id="plstr-playlist-details" class="form">
-                    <fieldset>
-                        <label>Title</label>
-                        <input name="title" type="text" value="<%= title %>" />
-                        <label>Description</label>
-                        <textarea name="description"><%= description %></textarea>   
-                        <button class="btn">Save Changes</button>
-                    </fieldset>
-                </form>
-            </div>
-        
-
-        </script>
-        <script type="text/html" id="plstr-alert">
-            <div class="alert alert-<%= type %>">
-            <%= message %>
-            </div>
-        </script>
-        </script>
         
         <script src="//connect.soundcloud.com/sdk.js"></script>
         <script type="text/javascript">

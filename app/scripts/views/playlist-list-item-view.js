@@ -20,7 +20,9 @@ define([
   'models/playlist-model',
   // Views
   'views/alert-view',
-  'views/playlist-detail-view'    
+  'views/playlist-detail-view',
+  // Templates
+  'text!templates/playlist-list-item.html'
 ],
 /**
  * Playlist List Item View
@@ -29,7 +31,7 @@ define([
  * @constructor
  * @return {Object} Marionette.ItemView
  */
-function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView){
+function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView, tpl){
   'use strict';
   return Marionette.ItemView.extend({
     /**
@@ -44,7 +46,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView)
      * @type {Mixed}
      * @memberOf PlaylistListItemView
      */    
-    template: _.template($('#plstr-tmpl-playlist-list-item').html()),
+    template: _.template(tpl),
 
     /**
      * DOM event listeners

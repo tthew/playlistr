@@ -1,0 +1,41 @@
+<div class="span8">
+<h1><%= title %></h1>
+<p><%= description %></p>
+<p><a class="btn start play"><i class="icon-play"></i> Play</a> <a class="btn stop"><i class="icon-stop"></i> Stop</a></p>
+<table class="table playlist">
+    <thead>
+        <tr>
+            <th class='icon'>&nbsp;</th>
+            <th>Track</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                <form id="plstr-form-add-sound" class="form form-inline">
+                    <fieldset>
+                        <label>Add Sound:</label> 
+                        <input name="uri" placeholder="Enter Soundcloud Url" /> 
+                        <button type="submit" class="btn">Add Sound</button>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+</div>
+
+<div class="span1 offset1">
+    <form id="plstr-playlist-details" class="form">
+        <fieldset>
+            <label>Title</label>
+            <input name="title" type="text" value="<%= title %>" />
+            <label>Description</label>
+            <textarea name="description"><%= description %></textarea>   
+            <button class="btn">Save Changes</button>
+        </fieldset>
+    </form>
+</div>

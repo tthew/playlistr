@@ -18,7 +18,9 @@ define([
   // Event Aggregator
   'vent',
   // Models
-  'models/sound-model'
+  'models/sound-model',
+  // Templates
+  'text!templates/sound-item.html'
 ], 
 /**
  * Sound Item View
@@ -28,7 +30,7 @@ define([
  * @return {Object} Marionette.ItemView
  * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.itemview.md
  */
-function(_, Backbone, Marionette, vent, Sound){
+function(_, Backbone, Marionette, vent, Sound, tpl){
   'use strict';
   return Marionette.ItemView.extend({
     /**
@@ -43,7 +45,7 @@ function(_, Backbone, Marionette, vent, Sound){
      * @type {Mixed}
      * @memberOf SoundView
      */    
-    template: _.template($('#plstr-tmpl-sound-item').html()),
+    template: _.template(tpl),
 
     /**
      * DOM event listeners

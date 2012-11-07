@@ -23,7 +23,8 @@ require.config({
     underscore: "../scripts/libs/underscore",
     marionette: "../components/backbone.marionette/lib/backbone.marionette",
     // Plugins
-    localStorage: "../components/Backbone.localStorage/backbone.localStorage"
+    localStorage: "../components/Backbone.localStorage/backbone.localStorage",
+    text: 'libs/text-2.0.3'
   },
 
   shim: {

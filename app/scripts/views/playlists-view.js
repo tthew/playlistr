@@ -15,7 +15,9 @@ define([
   'backbone',
   'marionette',
   // Views
-  'views/playlist-list-item-view'
+  'views/playlist-list-item-view',
+  
+  'text!templates/playlists.html'
 ], 
 /**
  * Playlists Composite View
@@ -24,7 +26,7 @@ define([
  * @constructor
  * @return {Object} Marionette.CompositeView
  */
-function(_, Backbone, Marionette, PlaylistListItemView){
+function(_, Backbone, Marionette, PlaylistListItemView, tpl){
   'use strict';
   return Marionette.CompositeView.extend({
     /**
@@ -32,7 +34,7 @@ function(_, Backbone, Marionette, PlaylistListItemView){
      * @type {Mixed}
      * @memberOf PlaylistsView
      */    
-  	template: _.template($('#plstr-tmpl-playlists').html()),
+  	template: _.template(tpl),
 
     /**
      * Item View 

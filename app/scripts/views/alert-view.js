@@ -13,7 +13,9 @@ define([
   // Libraries
 	'lodash',
   'backbone',
-  'marionette'
+  'marionette',
+  // Templates
+  'text!templates/alert.html'
 ], 
 /**
  * AlertView
@@ -22,7 +24,7 @@ define([
  * @constructor
  * @return {Object} Backbone.View
  */
-function(_, Backbone, Marionette){
+function(_, Backbone, Marionette, tpl){
   'use strict';
   return Backbone.View.extend({
 
@@ -31,7 +33,7 @@ function(_, Backbone, Marionette){
      * @type {Mixed}
      * @memberOf AlertView
      */
-  	template: _.template($('#plstr-alert').html()),
+  	template: _.template(tpl),
 
     /**
      * Constructor

@@ -23,7 +23,9 @@ define([
   'views/sound-view',
   'views/alert-view',
   // Collections
-  'collections/sounds-collection'
+  'collections/sounds-collection',
+  // Templates
+  'text!templates/playlist-detail.html'
 ], 
 /**
  * Playlist Composite (Detail) View
@@ -32,7 +34,7 @@ define([
  * @constructor
  * @return {Object} Marionette.CompositeView
  */
-function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, Sounds){
+function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, Sounds, tpl){
   'use strict';
   return Marionette.CompositeView.extend({
     /**
@@ -40,7 +42,7 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
      * @type {Mixed}
      * @memberOf PlaylistDetailView
      */
-  	template: _.template($('#plstr-tmpl-playlist-detail').html()),
+  	template: _.template(tpl),
 
     /**
      * Item View 
