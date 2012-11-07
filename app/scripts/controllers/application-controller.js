@@ -50,6 +50,7 @@ function(_, Backbone, Marionette, vent, Playlists, ApplicationView) {
      */
     Controller.index = function() {
       vent.trigger('app:show');
+      vent.trigger('app:region:close:main');
     };
 
     /**

@@ -51,6 +51,13 @@
 			background-color: rgba(0,0,255,0.1);
 		}	
 	}
+
+	#plstr-form-add-sound {
+		label {
+			position: absolute; 
+			left: -9999999px;
+		}
+	}
 }
 
 

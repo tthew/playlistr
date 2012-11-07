@@ -69,7 +69,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView)
      * @memberOf PlaylistListItemView
      */
     click: function() {
-      Backbone.history.navigate('/playlist/' + this.model.id, true)
+      Backbone.history.navigate('playlist/' + this.model.id, true)
       // vent.trigger('playlist:show', this.model);
     },
 
