@@ -29,7 +29,7 @@ define([
   "views/playlist-detail-view",
   "views/alert-view",
   // Plugins.
-  "../components/bootstrap-js/bootstrap.js"
+  "bootstrap"
 ],
 /**
  * Application

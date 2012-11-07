@@ -17,7 +17,9 @@ define([
   // Event Aggregator
   'vent',
   // Collections
-  'collections/sounds-collection'
+  'collections/sounds-collection',
+  // Templates
+  'text!templates/bookmarklet.html'
 ], 
 /**
  * Application View
@@ -26,7 +28,7 @@ define([
  * @constructor
  * @return {Object} Backbone.View
  */
-function(_, Backbone, Marionette, vent, Sounds){
+function(_, Backbone, Marionette, vent, Sounds, bookmarkletTpl){
   'use strict';
   return Backbone.View.extend({
     /**
@@ -45,6 +47,15 @@ function(_, Backbone, Marionette, vent, Sounds){
   		'submit form#plstr-new-playlist-modal' : 'newPlaylist',
   		'click #plstr-new-playlist-modal .plstr-close' : 'closeModal'
   	},
+
+    /**
+     * Constructor
+     * @memberOf  ApplicationView
+     */
+
+    initialize: function() {
+      this.$('.plstr-bookmarklet').append(_.template(bookmarkletTpl,{origin: window.location.origin}));
+    },
 
     /**
      * Handle click event & trigger playlist:create global @event

@@ -23,6 +23,7 @@ require.config({
     underscore: "../scripts/libs/underscore",
     marionette: "../components/backbone.marionette/lib/backbone.marionette",
     // Plugins
+    bootstrap: "../components/bootstrap-js/bootstrap",
     localStorage: "../components/Backbone.localStorage/backbone.localStorage",
     text: 'libs/text-2.0.3'
   },
@@ -37,6 +38,7 @@ require.config({
       deps: ['backbone'],
       exports: 'Backbone.Marionette'
     },
-    'localStorage' : ['backbone']
+    localStorage : ['backbone'],
+    "bootstrap": ['jquery']
   }
 });
