@@ -44,7 +44,6 @@ There is a web accesible demo available over here: [http://lit-cove-2242.herokua
 * Finish off Bookmarklet implementation
 * Implement on demand template management with RequireJS
 * Robust tests + fully passing test suite
-* Refactoring 
 
 
 ## License
