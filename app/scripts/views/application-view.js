@@ -56,7 +56,7 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      */
 
     initialize: function() {
-      this.$('.plstr-bookmarklet').append(_.template(bookmarkletTpl,{origin: window.location.origin}));
+      this.$('.plstr-bookmarklet').append(_.template(bookmarkletTpl,{origin: 'http://' + window.location.host}));
     },
 
     /**
