@@ -10,7 +10,7 @@
  * @link http://lucidmoon.co.uk
  */
 define([
-	'marionette'
+    'marionette'
 ],
 /**
  * Application Event Aggregator
@@ -20,6 +20,6 @@ define([
  * @return {Marionette.EventAggregator} Marionette.EventAggregator
  */
 function(marionette){
-  	"use strict";
-  	return new marionette.EventAggregator();
+    "use strict";
+    return new marionette.EventAggregator();
 });

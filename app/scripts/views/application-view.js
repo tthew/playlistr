@@ -37,18 +37,18 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      * @type {Mixed}
      * @memberOf ApplicationView
      */
-  	el: "body",
+    el: "body",
 
     /**
      * DOM event listeners
      * @type {Mixed}
      * @memberOf ApplicationView
      */
-  	events: {
-  		'submit form#plstr-new-playlist-modal' : 'newPlaylist',
+    events: {
+      'submit form#plstr-new-playlist-modal' : 'newPlaylist',
       'submit form#plstr-bookmarklet-helper-modal' : 'addSoundToPlaylist',
-  		'click #plstr-new-playlist-modal .plstr-close' : 'closeModal'
-  	},
+      'click #plstr-new-playlist-modal .plstr-close' : 'closeModal'
+    },
 
     /**
      * Constructor
@@ -64,18 +64,18 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      * @param  {Object} e Event
      * @memberOf ApplicationView
      */
-  	newPlaylist: function(e) {
-  		e.preventDefault();
-  		
+    newPlaylist: function(e) {
+      e.preventDefault();
+      
       // Trigger playlist:create application event
-  		vent.trigger('playlist:create', {
-  			title: this.$('form#plstr-new-playlist-modal input[name=title]').val(),
-  			description: this.$('form#plstr-new-playlist-modal textarea[name=description]').val()
-  		});
+      vent.trigger('playlist:create', {
+        title: this.$('form#plstr-new-playlist-modal input[name=title]').val(),
+        description: this.$('form#plstr-new-playlist-modal textarea[name=description]').val()
+      });
 
       // Close modal dialog
-  		this.closeModal();
-  	},
+      this.closeModal();
+    },
 
     /**
      * [addSoundToPlaylist description]
@@ -105,9 +105,9 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      * @memberOf ApplicationView
      * @see http://twitter.github.com/bootstrap/javascript.html#modals
      */
-  	closeModal: function() {
-  		this.$('#plstr-new-playlist-modal').modal('hide');
-  	}
+    closeModal: function() {
+      this.$('#plstr-new-playlist-modal').modal('hide');
+    }
   });
 
 });

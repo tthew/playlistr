@@ -11,7 +11,7 @@
  */
 define([
   // Libraries
-	'lodash',
+  'lodash',
   'backbone',
   'marionette',
   // Templates
@@ -33,7 +33,7 @@ function(_, Backbone, Marionette, tpl){
      * @type {Mixed}
      * @memberOf AlertView
      */
-  	template: _.template(tpl),
+    template: _.template(tpl),
 
     /**
      * Constructor

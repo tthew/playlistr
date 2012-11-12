@@ -39,7 +39,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView,
      * @type {String}
      * @memberOf PlaylistListItemView
      */
-  	tagName: 'li',
+    tagName: 'li',
 
     /**
      * Template

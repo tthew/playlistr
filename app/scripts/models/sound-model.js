@@ -10,9 +10,9 @@
  * @link http://lucidmoon.co.uk
  */
 define([
-	// Libraries
-	'lodash',
-  	'backbone'
+    // Libraries
+    'lodash',
+    'backbone'
 ], 
 /**
  * Sound Model
@@ -22,11 +22,11 @@ define([
  * @return {Object} Backbone.Model
  */
 function(_, Backbone){
-	'use strict';
-	return Backbone.Model.extend({
-		defaults: {
-		  playing: false
-		}
-  	});
+    'use strict';
+    return Backbone.Model.extend({
+        defaults: {
+          playing: false
+        }
+    });
   
 });

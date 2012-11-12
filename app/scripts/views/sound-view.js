@@ -38,7 +38,7 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
      * @type {String}
      * @memberOf SoundView
      */    
-  	tagName: 'tr',
+    tagName: 'tr',
 
     /**
      * Template

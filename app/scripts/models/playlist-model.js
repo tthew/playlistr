@@ -11,9 +11,9 @@
  */
 
 define([
-	// Libraries
-	'lodash',
-	'backbone'
+    // Libraries
+    'lodash',
+    'backbone'
 ], 
 /**
  * Playlists Model
@@ -23,12 +23,12 @@ define([
  * @return {Object} Backbone.Model
  */
 function(_, Backbone){
-  	'use strict';	
-	return Backbone.Model.extend({
-		defaults: {
-			'title': '',
-			'description': '',
-			'sounds': ''
-		}
-	});
+    'use strict';   
+    return Backbone.Model.extend({
+        defaults: {
+            'title': '',
+            'description': '',
+            'sounds': ''
+        }
+    });
 });

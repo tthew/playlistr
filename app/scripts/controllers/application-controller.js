@@ -10,13 +10,13 @@
  * @link http://lucidmoon.co.uk
  */
 define([
-	 // Libraries
-	'lodash',
+   // Libraries
+  'lodash',
   'backbone',
   'marionette',
   // Event Aggregator
   'vent',
-	// Collections
+  // Collections
   'collections/playlists-collection',
   // Views
   'views/application-view',

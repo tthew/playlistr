@@ -12,7 +12,7 @@
 
 define([
   // Libraries
-	'lodash',
+  'lodash',
   'backbone',
   // Models
   'models/sound-model',
@@ -28,24 +28,24 @@ define([
  */
  function(_, Backbone, Sound){
   'use strict';
- 	return Backbone.Collection.extend({
+  return Backbone.Collection.extend({
      /**
       * Sound Model
       * @type {Object}
       */
-  		model: Sound,
+      model: Sound,
 
       /**
        * local storage
        * @see https://github.com/jeromegn/Backbone.localStorage
        */
-  		localStorage: new Backbone.LocalStorage('plstr-playlists'),
+      localStorage: new Backbone.LocalStorage('plstr-playlists'),
 
       /**
        * Constructor
        * @memberOf Sounds
        */
-  		initialize: function() {
+      initialize: function() {
         var self = this;
 
         /**
@@ -53,7 +53,7 @@ define([
          * @see https://github.com/jeromegn/Backbone.localStorage
          */
         this.fetch();
-  		}
-  	});
+      }
+    });
 });
 

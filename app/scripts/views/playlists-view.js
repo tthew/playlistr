@@ -34,7 +34,7 @@ function(_, Backbone, Marionette, PlaylistListItemView, tpl){
      * @type {Mixed}
      * @memberOf PlaylistsView
      */    
-  	template: _.template(tpl),
+    template: _.template(tpl),
 
     /**
      * Item View 

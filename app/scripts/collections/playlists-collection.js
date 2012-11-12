@@ -15,9 +15,9 @@ define([
   'lodash',
   'backbone',
   // Models
-	'models/playlist-model',
+  'models/playlist-model',
   // Plugins
-	'localStorage'
+  'localStorage'
 ], 
 
 /**
@@ -29,31 +29,31 @@ define([
  */
 function(_, Backbone, PlaylistModel){
   'use strict';
- 	return Backbone.Collection.extend({
+  return Backbone.Collection.extend({
      /**
       * Sound Model
       * @type {Object}
-      */  		
+      */      
       model: PlaylistModel,
 
       /**
        * local storage
        * @see https://github.com/jeromegn/Backbone.localStorage
        */
-  		localStorage: new Backbone.LocalStorage('plstr-playlists'),
+      localStorage: new Backbone.LocalStorage('plstr-playlists'),
 
       /**
        * Constructor
        * @memberOf PlaylistsCollection
        */
-  		initialize: function() {
-  			var self = this;
+      initialize: function() {
+        var self = this;
         /**
          * Fetch collection from storage
          * @see https://github.com/jeromegn/Backbone.localStorage
          */
         this.fetch();
-  		}
-  	});
+      }
+    });
 });
 

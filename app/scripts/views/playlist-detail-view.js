@@ -42,7 +42,7 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
      * @type {Mixed}
      * @memberOf PlaylistDetailView
      */
-  	template: _.template(tpl),
+    template: _.template(tpl),
 
     /**
      * Item View 
