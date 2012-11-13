@@ -152,7 +152,6 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    */
   app.sidebar.show(new PlaylistsView(viewOptions));
 
-
   /**
    * Initialise Soundcloud SDK
    * @see http://developers.soundcloud.com/docs/api/sdks#javascript
