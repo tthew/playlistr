@@ -55,7 +55,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView,
      */
     events: {
       'click': 'click',
-      'click li .delete': 'delete'
+      'click li .delete': 'deletePlaylist'
     },
   
     /**
@@ -80,8 +80,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView,
      * @memberOf PlaylistListItemView
      * @todo handle model.destroy() error
      */
-    delete: function() {
-      var self = this;
+    deletePlaylist: function() {
       var title = this.model.get('title'); 
       // Confirm delete
       if (confirm('Are you sure you want to delete \'' + title + '\'?\n\nThis action can not be un-done.')) {
@@ -93,7 +92,7 @@ function(_, Backbone, Marionette, vent, AlertView, Playlist, PlaylistDetailView,
             var alert = new AlertView({'message': '\'<strong>' + title + '</strong>\' deleted succesfully','type':'success'});
           },
           error: function() {
-
+            
           }
         });  
       } 

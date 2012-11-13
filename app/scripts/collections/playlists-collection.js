@@ -47,7 +47,6 @@ function(_, Backbone, PlaylistModel){
        * @memberOf PlaylistsCollection
        */
       initialize: function() {
-        var self = this;
         /**
          * Fetch collection from storage
          * @see https://github.com/jeromegn/Backbone.localStorage

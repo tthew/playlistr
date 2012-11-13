@@ -42,7 +42,6 @@ function(_, Backbone, Marionette, tpl){
     initialize: function() {
       if (_.isUndefined(this.options.message)) {
         throw new Error('AlertView: Expected a message but none was found');
-        return;
       }
       this.render();
     },
@@ -54,8 +53,6 @@ function(_, Backbone, Marionette, tpl){
      * @todo refactor using Marionette regions, compositeviews and item views
      */
     render: function() {
-      var self = this;
-
       // Parse template
       this.el = this.template(this.options);
 

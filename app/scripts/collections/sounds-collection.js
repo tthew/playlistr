@@ -46,8 +46,6 @@ define([
        * @memberOf Sounds
        */
       initialize: function() {
-        var self = this;
-
         /**
          * Fetch collection from storage
          * @see https://github.com/jeromegn/Backbone.localStorage

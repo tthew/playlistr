@@ -67,7 +67,7 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
       vent.on("sound:play", function(model) {
 
         if (model.cid == self.model.cid) {
-          self.stopSound
+          self.stopSound();
           self.streamSound();
         }
       });
