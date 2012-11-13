@@ -79,8 +79,15 @@ module.exports = function( grunt ) {
     lint: {
       files: [
         'Gruntfile.js',
-        'app/scripts/**/*.js',
+        'app/scripts/collections/*.js',
+        'app/scripts/controllers/*.js',
+        'app/scripts/models/*.js',
+        'app/scripts/views/*.js',
+        'app/scripts/*.js',
         'spec/**/*.js'
+      ],
+      ignore: [
+        'app/scripts/libs/'
       ]
     },
 
@@ -101,7 +108,16 @@ module.exports = function( grunt ) {
         browser: true
       },
       globals: {
-        jQuery: true
+        jQuery: true,
+        Backbone: true,
+        lodash: true,
+        SC: true,
+        define: true,
+        require: true,
+        dom: true,
+        $: true,
+        _: true,
+        module: true
       }
     },
 
@@ -170,7 +186,7 @@ module.exports = function( grunt ) {
       baseUrl: './scripts',
       wrap: true,
       name: 'config'
-    },
+    }
   });
 
   // Alias the `test` task to run the `mocha` task instead

@@ -14,9 +14,7 @@ require([
   // Application.
   "app",
   // Router.
-  "router",
-  // Views
-  "views/application-view"
+  "router"
 ],
 /**
  * Main module

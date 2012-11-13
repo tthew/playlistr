@@ -45,7 +45,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
   var app = new Marionette.Application();
   var playlistsCollection = new PlaylistsCollection();
 
-  if (playlistsCollection.length == 0) {
+  if (playlistsCollection.length === 0) {
     $("#plstr-new-playlist-modal").modal("show");
   }
   
@@ -65,7 +65,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    */
   var viewOptions = {
     collection: playlistsCollection
-  }
+  };
 
   /**
    * Set up application initializers
@@ -127,7 +127,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
            * @todo refactor! 
            */
           sounds = options.model.get('sounds') || [];
-          sounds.push(response)
+          sounds.push(response);
           options.model.save({'sounds':sounds});
           
           // Trigger playlist:show application event
@@ -144,7 +144,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    */
   vent.on("app:region:close:main", function() {
     app.main.close();
-  })
+  });
 
   /**
    * Show Sidebar Region

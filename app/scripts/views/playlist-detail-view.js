@@ -80,7 +80,7 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
     initialize: function() {
       var self = this;
 
-      self.model.on('change', self.render)
+      self.model.on('change', self.render);
       self.collection.on('change', self.render);
 
       vent.on('playlist:next', function(previousSound) {

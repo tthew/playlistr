@@ -37,7 +37,7 @@ function(_, Backbone, Marionette, vent, Playlists, ApplicationView, PlaylistSele
      * Controller public API
      * @type {Object}
      */
-    var Controller = {}
+    var Controller = {};
 
     /**
      * Initialise Application View
