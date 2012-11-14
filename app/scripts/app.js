@@ -100,13 +100,21 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    * playlist:create application event listener
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.eventaggregator.md   
    */
-  vent.bind('playlist:create', function(playlist) {
+  vent.on('playlist:create', function(playlist) {
     playlistsCollection.create(playlist, {
       success: function(model) {
         var alert = new AlertView({'message': '\'<strong>' + playlist.title + '</strong>\' succesfully created','type':'success'});
         Backbone.history.navigate("playlist/" + model.id, true);
       }
     });
+  });
+
+  vent.on('sound:play', function() {
+    $('head link[rel=icon]').attr("href","/favicon-play.ico");
+  });
+
+  vent.on('sound:stop', function() {
+    $('head link[rel=icon]').attr("href","/favicon.ico");
   });
 
   vent.on('playlist:addsoundbyurl', function(options) {
