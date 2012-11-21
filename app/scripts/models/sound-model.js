@@ -25,7 +25,9 @@ function(_, Backbone){
     'use strict';
     return Backbone.Model.extend({
         defaults: {
-          playing: false
+          playing: false,
+          waveform_url: null,
+          title: null
         }
     });
   
