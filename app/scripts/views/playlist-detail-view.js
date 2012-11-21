@@ -87,16 +87,9 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
         // Does next track exist?
         if (_.isObject(self.collection.models[_.indexOf(self.collection.models, previousSound) + 1])) {
           vent.trigger('sound:stop');
-          vent.trigger('sound:play', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
+          vent.trigger('sound:stream', self.collection.models[_.indexOf(self.collection.models, previousSound) + 1]);
         }
       });
-
-      /* playlist:play application event listener */
-      vent.on('playlist:play', function() {
-        vent.trigger('sound:stop');
-        vent.trigger('sound:play', self.collection.models[0]);
-      });
-
     },
 
     /**
@@ -164,7 +157,7 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
      * @memberOf PlaylistDetailView
      */
     play: function() {
-      vent.trigger('sound:play', this.collection.models[0]);
+      vent.trigger('sound:stream', this.collection.models[0]);
     }
   });
 });

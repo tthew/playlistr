@@ -41,9 +41,13 @@ define([
  */
 function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, ApplicationController, PlaylistsView, PlaylistDetailView, AlertView) {
   'use strict';
+  
+  var activeSoundModel;
+
   // Initialise Application
   var app = new Marionette.Application();
   var playlistsCollection = new PlaylistsCollection();
+
 
   if (playlistsCollection.length === 0) {
     $("#plstr-new-playlist-modal").modal("show");
@@ -109,12 +113,46 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
     });
   });
 
-  vent.on('sound:play', function() {
-    $('head link[rel=icon]').attr("href","/favicon-play.ico");
+
+  vent.on('sound:stream', function(model) {
+    
+    SC.stream("/tracks/" + model.get('id'), function(sound) {
+        vent.trigger('sound:stop');
+        // Is this sound already playing
+        if (!model.get('playing')) {
+          // Setup event listener to trigger 1sec before end of track
+          sound.onPosition(model.get('duration') - 1000, function() {
+            // Trigger sound:finished application event
+            vent.trigger("sound:finished");
+            // Trigger playlist:next application event
+            vent.trigger("playlist:next", model);
+          });
+
+          // Update favicon
+          $('head link[rel=icon]').attr("href","/favicon-play.ico");
+
+          // Play sound
+          sound.play();
+
+          // Set playing attribute to true
+          model.set('playing', true);
+
+          // Set Sound object
+          model.set('sound', sound);
+
+          // Set Active Sound Model
+          activeSoundModel = model;
+        }
+      });
   });
 
+
   vent.on('sound:stop', function() {
-    $('head link[rel=icon]').attr("href","/favicon.ico");
+    if (activeSoundModel) {
+      $('head link[rel=icon]').attr("href","/favicon.ico");
+      activeSoundModel.get('sound').stop();
+      activeSoundModel.set('playing', false);
+    }
   });
 
   vent.on('playlist:addsoundbyurl', function(options) {

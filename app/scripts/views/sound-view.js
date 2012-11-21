@@ -63,63 +63,6 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
     initialize: function() {
       var self = this;
       this.model.on('change', this.render, this);
-
-      vent.on("sound:play", function(model) {
-
-        if (model.cid == self.model.cid) {
-          self.stopSound();
-          self.streamSound();
-        }
-      });
-
-      vent.bind("sound:finished", function() {
-        self.model.set("playing", false);
-      });
-
-      vent.bind("sound:stop", function() {
-        self.stopSound();
-      });
-    },
-
-    /**
-     * Stop sound from playing
-     * @memberOf SoundView
-     */
-    stopSound: function() {
-      if (this.sound) {
-        this.sound.stop();
-        this.model.set('playing', false);  
-      }
-    },
-
-    /**
-     * Stream Sound
-     * @memberOf SoundView
-     * @todo better error handling
-     */
-    streamSound: function() {
-      var self = this;
-
-      // Initialise stream
-      SC.stream("/tracks/" + this.model.get('id'), function(sound) {
-        self.sound = sound;
-        // Is this sound already playing
-        if (!self.model.get('playing')) {
-          // Setup event listener to trigger 1sec before end of track
-          sound.onPosition(self.model.get('duration') - 1000, function() {
-            // Trigger sound:finished application event
-            vent.trigger("sound:finished");
-            // Trigger playlist:next application event
-            vent.trigger("playlist:next", self.model);
-          });
-
-          // Play sound
-          sound.play();
-
-          // Set playing attribute to true
-          self.model.set('playing', true);
-        }
-      });
     },
 
     /**
@@ -127,13 +70,8 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
      * @memberOf Soundview
      */
     click: function() {
-      var self = this;
-
-      // Trigger sound:stop application event
-      vent.trigger("sound:stop");
-
       // Stream sound
-      self.streamSound();
+      vent.trigger("sound:stream", this.model);
     }
   });
 });
