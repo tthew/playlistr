@@ -20,6 +20,6 @@ define([
  * @return {Marionette.EventAggregator} Marionette.EventAggregator
  */
 function(marionette){
-    "use strict";
+    'use strict';
     return new marionette.EventAggregator();
 });

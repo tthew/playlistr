@@ -39,7 +39,7 @@ define([
        * local storage
        * @see https://github.com/jeromegn/Backbone.localStorage
        */
-      localStorage: new Backbone.LocalStorage('plstr-playlists'),
+      localStorage: new Backbone.LocalStorage('plstr-sounds'),
 
       /**
        * Constructor

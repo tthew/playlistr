@@ -12,9 +12,9 @@
 
 require([
   // Application.
-  "app",
+  'app',
   // Router.
-  "router"
+  'router'
 ],
 /**
  * Main module

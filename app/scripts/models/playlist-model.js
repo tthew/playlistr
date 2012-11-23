@@ -13,7 +13,9 @@
 define([
     // Libraries
     'lodash',
-    'backbone'
+    'backbone',
+    // Collections,
+    'collections/sounds-collection'
 ], 
 /**
  * Playlists Model
@@ -22,13 +24,13 @@ define([
  * @constructor
  * @return {Object} Backbone.Model
  */
-function(_, Backbone){
+function(_, Backbone, Sounds){
     'use strict';   
     return Backbone.Model.extend({
         defaults: {
             'title': '',
             'description': '',
-            'sounds': ''
+            'sounds': new Sounds()
         }
     });
 });

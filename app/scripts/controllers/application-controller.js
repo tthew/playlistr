@@ -64,9 +64,9 @@ function(_, Backbone, Marionette, vent, Playlists, ApplicationView, PlaylistSele
       var playlists = new Playlists();
       var model = playlists.get(playlistId);
       if (!_.isUndefined(model)) {
-        vent.trigger("playlist:show", model);
+        vent.trigger('playlist:show', model);
       } else {
-        vent.trigger("playlist:notfound");
+        vent.trigger('playlist:notfound');
       }
     };
 
@@ -77,23 +77,23 @@ function(_, Backbone, Marionette, vent, Playlists, ApplicationView, PlaylistSele
      */
     Controller.addSound =function(uri) {
       // use route path data to pre-populate form
-      $("#plstr-bookmarklet-helper-modal input[name=uri]").val(uri);
+      $('#plstr-bookmarklet-helper-modal input[name=uri]').val(uri);
 
       var playlists = new Playlists();
       var template = _.template(PlaylistSelectTpl, {list: playlists.toJSON()});
 
       // Replace DOM placeholder with parsed template
-      $("#plstr-bookmarklet-helper-modal .plstr-playlists-select").replaceWith(template);
+      $('#plstr-bookmarklet-helper-modal .plstr-playlists-select').replaceWith(template);
 
       /**
        * Display modal
        * @see http://twitter.github.com/bootstrap/javascript.html#modals
        */
-      $("#plstr-bookmarklet-helper-modal").modal("show");
+      $('#plstr-bookmarklet-helper-modal').modal('show');
     };
 
     /** Trigger app:show application event */
-    vent.trigger("app:show");
+    vent.trigger('app:show');
 
     return Controller;
 

@@ -53,7 +53,7 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
      * @memberOf SoundView
      */
     events: {
-      "click": "click"
+      'click': 'click'
     },
 
     /**
@@ -71,7 +71,7 @@ function(_, Backbone, Marionette, vent, Sound, tpl){
      */
     click: function() {
       // Stream sound
-      vent.trigger("sound:stream", this.model);
+      vent.trigger('sound:stream', this.model);
     }
   });
 });

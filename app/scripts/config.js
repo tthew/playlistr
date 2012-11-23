@@ -11,34 +11,34 @@
  */
 require.config({
   // Initialize the application with the main application file.
-  deps: ["main"],
+  deps: ['main'],
   paths: {
     // JavaScript folders.
-    libs: "../scripts/libs",
-    plugins: "../scripts/plugins",
+    libs: '../scripts/libs',
+    plugins: '../scripts/plugins',
     // Libraries.
-    jquery: "../scripts/libs/jquery",
-    lodash: "../scripts/libs/lodash",
-    backbone: "../scripts/libs/backbone",
-    underscore: "../scripts/libs/underscore",
-    marionette: "../components/backbone.marionette/lib/backbone.marionette",
+    jquery: '../scripts/libs/jquery',
+    lodash: '../scripts/libs/lodash',
+    backbone: '../scripts/libs/backbone',
+    underscore: '../scripts/libs/underscore',
+    marionette: '../components/backbone.marionette/lib/backbone.marionette',
     // Plugins
-    bootstrap: "../components/bootstrap-js/bootstrap",
-    localStorage: "../components/Backbone.localStorage/backbone.localStorage",
+    bootstrap: '../components/bootstrap-js/bootstrap',
+    localStorage: '../components/Backbone.localStorage/backbone.localStorage',
     text: 'libs/text-2.0.3'
   },
 
   shim: {
     // Backbone library depends on lodash and jQuery.
     backbone: {
-      deps: ["lodash", "jquery"],
-      exports: "Backbone"
+      deps: ['lodash', 'jquery'],
+      exports: 'Backbone'
     },
     marionette: {
       deps: ['backbone'],
       exports: 'Backbone.Marionette'
     },
     localStorage : ['backbone'],
-    "bootstrap": ['jquery']
+    'bootstrap': ['jquery']
   }
 });

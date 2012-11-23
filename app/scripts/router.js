@@ -12,11 +12,11 @@
 
 define([
   // Application.
-  "app",
+  'app',
   // Event Aggregator
-  "vent",
+  'vent',
   // Libraries
-  "marionette"
+  'marionette'
 ],
 /**
  * Application Router
@@ -34,9 +34,9 @@ function(app, vent, Marionette) {
      * @type {Object}
      */
     appRoutes: {
-      "": "index",
-      "playlist/:id": "playlist",
-      "add_sound/*uri": "addSound"
+      '': 'index',
+      'playlist/:id': 'playlist',
+      'add_sound/*uri': 'addSound'
     }
 
   });

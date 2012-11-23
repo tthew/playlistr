@@ -12,24 +12,24 @@
 
 define([
   // Libraries.
-  "jquery",
-  "lodash",
-  "marionette",
+  'jquery',
+  'lodash',
+  'marionette',
   // Event Aggregator
-  "vent",
+  'vent',
   // App Router
-  "router",
+  'router',
   // Collections
-  "collections/playlists-collection",
-  "collections/sounds-collection",  
+  'collections/playlists-collection',
+  'collections/sounds-collection',  
   // Controllers
-  "controllers/application-controller",
+  'controllers/application-controller',
   // Views
-  "views/playlists-view",
-  "views/playlist-detail-view",
-  "views/alert-view",
+  'views/playlists-view',
+  'views/playlist-detail-view',
+  'views/alert-view',
   // Plugins.
-  "bootstrap"
+  'bootstrap'
 ],
 /**
  * Application
@@ -50,7 +50,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
 
 
   if (playlistsCollection.length === 0) {
-    $("#plstr-new-playlist-modal").modal("show");
+    $('#plstr-new-playlist-modal').modal('show');
   }
   
   /**
@@ -85,7 +85,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    * App post-initialisation event listener
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.application.md#application-event
    */
-  app.on("initialize:after", function() {
+  app.on('initialize:after', function() {
     Backbone.history.start();
   });
 
@@ -93,7 +93,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    * playlist:show application event listener
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.eventaggregator.md   
    */
-  vent.on("playlist:show", function(playlist) {
+  vent.on('playlist:show', function(playlist) {
     app.main.show(new PlaylistDetailView({
       model: playlist,
       collection: new SoundsCollection(playlist.get('sounds') || [])
@@ -108,7 +108,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
     playlistsCollection.create(playlist, {
       success: function(model) {
         var alert = new AlertView({'message': '\'<strong>' + playlist.title + '</strong>\' succesfully created','type':'success'});
-        Backbone.history.navigate("playlist/" + model.id, true);
+        Backbone.history.navigate('playlist/' + model.id, true);
       }
     });
   });
@@ -116,20 +116,20 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
 
   vent.on('sound:stream', function(model) {
     
-    SC.stream("/tracks/" + model.get('id'), function(sound) {
+    SC.stream('/tracks/' + model.get('id'), function(sound) {
         vent.trigger('sound:stop');
         // Is this sound already playing
         if (!model.get('playing')) {
           // Setup event listener to trigger 1sec before end of track
           sound.onPosition(model.get('duration') - 1000, function() {
             // Trigger sound:finished application event
-            vent.trigger("sound:finished");
+            vent.trigger('sound:finished');
             // Trigger playlist:next application event
-            vent.trigger("playlist:next", model);
+            vent.trigger('playlist:next', model);
           });
 
           // Update favicon
-          $('head link[rel=icon]').attr("href","/favicon-play.ico");
+          $('head link[rel=icon]').attr('href','/favicon-play.ico');
 
           // Play sound
           sound.play();
@@ -149,7 +149,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
 
   vent.on('sound:stop', function() {
     if (activeSoundModel) {
-      $('head link[rel=icon]').attr("href","/favicon.ico");
+      $('head link[rel=icon]').attr('href','/favicon.ico');
       activeSoundModel.get('sound').stop();
       activeSoundModel.set('playing', false);
     }
@@ -188,7 +188,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
    * app:region:close:main application event listener
    * @see https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.eventaggregator.md   
    */
-  vent.on("app:region:close:main", function() {
+  vent.on('app:region:close:main', function() {
     app.main.close();
   });
 
@@ -207,7 +207,7 @@ function($, _, Marionette, vent, Router, PlaylistsCollection, SoundsCollection, 
       client_id: '4fb5b0db1d4852e4b1487a0254a74b70'
     });
   } else {
-    throw new Error("Playlistr: required dependency Soundcloud Javascipr SDK is missing");
+    throw new Error('Playlistr: required dependency Soundcloud Javascipr SDK is missing');
   }
 
   return app;

@@ -37,7 +37,7 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      * @type {Mixed}
      * @memberOf ApplicationView
      */
-    el: "body",
+    el: 'body',
 
     /**
      * DOM event listeners
@@ -91,9 +91,9 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
 
       if(!_.isUndefined(playlist)) {
         // Trigger playlist:addsoundbyurl application events
-        vent.trigger("playlist:addsoundbyurl", {model: playlist, url: this.$('form#plstr-bookmarklet-helper-modal input[name=uri]').val()});  
+        vent.trigger('playlist:addsoundbyurl', {model: playlist, url: this.$('form#plstr-bookmarklet-helper-modal input[name=uri]').val()});  
         // Trigger playlist:show application event
-        vent.trigger("playlist:show", playlist);
+        vent.trigger('playlist:show', playlist);
         // Hide modal dialog
         this.$('form#plstr-bookmarklet-helper-modal').modal('hide');
       }

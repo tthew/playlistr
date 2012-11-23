@@ -108,7 +108,7 @@ function(_, Backbone, Marionette, vent, Playlist, Sound, SoundView, AlertView, S
       url = this.$('form#plstr-form-add-sound input[name=uri]').val();
 
       // Trigger playlist:addsoundbyurl application event
-      vent.trigger("playlist:addsoundbyurl", {model: self.model, url: url});
+      vent.trigger('playlist:addsoundbyurl', {model: self.model, url: url});
 
     },
 
