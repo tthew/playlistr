@@ -106,6 +106,8 @@ function(_, Backbone, Marionette, vent, Sounds, Playlists, bookmarkletTpl){
      * @see http://twitter.github.com/bootstrap/javascript.html#modals
      */
     closeModal: function() {
+      this.$('form#plstr-new-playlist-modal input[name=title]').val('');
+      this.$('form#plstr-new-playlist-modal textarea[name=description]').val('');
       this.$('#plstr-new-playlist-modal').modal('hide');
     }
   });
