@@ -1,7 +1,7 @@
 define([
 
   // import the module to be tested
-  'app'
+  // 'app'
 
 ], function(app) {
   'use strict';
