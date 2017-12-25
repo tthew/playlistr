@@ -1,5 +1,5 @@
 # Playlistr
-A [Soundcloud](http://www.soundcloud.com) playlisting application built with [Backbone](http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCIQFjAA&url=http%3A%2F%2Fbackbonejs.org%2F&ei=mW2aUNfLJcfRhAfW1YCoAQ&usg=AFQjCNEQiFXPSOG9TaqO8NIjr09_aBVI1w), [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette), [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage), [RequireJS](http://http://requirejs.org/), the [Mocha](http://visionmedia.github.com/mocha/) test framework and  [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for good looks, out-of-the-box.
+A [Soundcloud](http://www.soundcloud.com) playlisting application built with [Backbone](http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCIQFjAA&url=http%3A%2F%2Fbackbonejs.org%2F&ei=mW2aUNfLJcfRhAfW1YCoAQ&usg=AFQjCNEQiFXPSOG9TaqO8NIjr09_aBVI1w), [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette), [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage), [RequireJS](http://http://requirejs.org/), the [Mocha](http://mochajs.org/) test framework and  [Twitter Bootstrap](http://twitter.github.com/bootstrap/) for good looks, out-of-the-box.
 
 
 ## Usage
